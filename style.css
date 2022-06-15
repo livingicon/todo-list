@@ -1,0 +1,52 @@
+
+/* GENERAL */
+
+:root {
+  /* 
+  --primary-dark: #333;
+  --secondary-dark: #444;
+  --primary-light: #eee;
+  --secondary-light: #ddd;
+  */
+}
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* HEADER */
+
+.header {
+  background-color: red;
+}
+
+/* BODY */
+
+.body {
+  /* background-color: green; */
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+.sidebar {
+  background-color: blue;
+}
+
+/* FOOTER */
+
+.footer {
+  background-color: orange;
+}
