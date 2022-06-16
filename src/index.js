@@ -5,15 +5,16 @@ const addProject = (function() {
   const addDefaultProject = function(e) {
     const projects = document.getElementById('projects');
     const defaultProject = document.createElement('div');
-    const projectTitle = document.createElement('h3');
+    const projectTitle = document.createElement('input');
     const addToDoBtn = document.createElement('button');
 
-    projectTitle.addEventListener('dblclick', test);
+    projectTitle.addEventListener('click', editProjectName);
     addToDoBtn.addEventListener('click', test2);
 
     defaultProject.setAttribute('id', 'project'); //use backticks to make id project1?
     projectTitle.setAttribute('id', 'projectTitle')
-    projectTitle.textContent = "Project Name";
+    projectTitle.setAttribute('type', 'text');
+    projectTitle.setAttribute('placeholder', 'Project Name')
     addToDoBtn.setAttribute('id', 'addToDoBtn');
     addToDoBtn.textContent = "+ add to-do list item";
 
@@ -22,11 +23,13 @@ const addProject = (function() {
     defaultProject.appendChild(addToDoBtn);
   }
 
-  const test = function() {
-    console.log("double click");
+  const editProjectName = function(e) { 
+    console.log("click");
   };
 
   const test2 = function() {
+    const toDoItem = document.createElement('input');
+    //open modal
     console.log("add a todo item");
   };
 
@@ -38,4 +41,4 @@ const addProjectBtn = document.getElementById('addProjectBtn');
 addProjectBtn.addEventListener('click', addProject.addDefaultProject);
 
 
-
+{/* <input type="text" id="myText" value="Some text..."></input> */}

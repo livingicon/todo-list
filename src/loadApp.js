@@ -3,10 +3,10 @@
 
 //1. onload, load previously saved projects
 // note: this is where the myProjects array is created
-// window.onload = function() {
-//   myProjects = JSON.parse(localStorage.getItem('myProjects'));
-//   if (myProjects === null) {
-//     myProjects = [];
-//   }
-//   addProject();
-// };
+window.onload = function() {
+  myProjects = JSON.parse(localStorage.getItem('myProjects'));
+  if (myProjects === null) {
+    myProjects = [];
+  }
+  addProject();
+};
