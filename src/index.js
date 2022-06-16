@@ -1,3 +1,3 @@
 console.log("Working");
 
-//what will we write here?
+//logic for adding project, adding todo, and editing them?

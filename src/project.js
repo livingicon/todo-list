@@ -4,38 +4,22 @@
 
 //1. onload, access local storage
 // window.onload = function() {
-//   myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+//   myProjects = JSON.parse(localStorage.getItem('myProjects'));
 //   if (myProjects === null) {
 //     myProjects = [];
 //   }
 //   addProject();
 // };
 
+//2. constructor (try to change to factory later?)
+function Project(title, description, dueDate, priority) {
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+}
 
-
-
-//2. class
-// class Project {
-//   constructor(
-//     title = "unknown",
-//     author = "unknown",
-//     pages = 0,
-//     read = 0
-//   ) {
-//     this.title = title;
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-//   }
-//  };
-
-//2. constructor
-// function Project(title, author, pages, read) {
-//   this.title = title;
-//   this.author = author;
-//   this.pages = pages;
-//   this.read = read;
-// };
+//it should be on the edit option when it loads.
 
 
 

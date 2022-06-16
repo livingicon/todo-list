@@ -36,13 +36,16 @@ body {
 /* BODY */
 
 .body {
-  /* background-color: green; */
   display: grid;
   grid-template-columns: 1fr 6fr;
 }
 
 .sidebar {
   background-color: blue;
+}
+
+.project-area {
+  background-color: grey;
 }
 
 /* FOOTER */
