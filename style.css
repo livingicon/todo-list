@@ -2,12 +2,16 @@
 /* GENERAL */
 
 :root {
-  
-  --primary-dark: rgb(0, 38, 53);
-  --secondary-dark: rgb(0, 56, 80);
-  --primary-light: #ddd;
-  --secondary-light: rgb(2, 83, 117);
- 
+  /* general */
+  --primary-dark: #164e63;
+  --secondary-dark: #0e7490;
+  --primary-light: #ecfeff;
+  --secondary-light: #67e8f9;
+  /* project card */
+  --project-dark: #1e293b;
+  --project-light: #475569;
+  --todo-dark: #94a3b8;
+  --todo-light: #f1f5f9;
 }
 
 html {
@@ -20,12 +24,6 @@ body {
   margin: 0;
   display: grid;
   grid-template-rows: auto 1fr auto;
-}
-
-#content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* HEADER */
@@ -56,4 +54,15 @@ body {
   background-color: var(--primary-dark);
   display: flex;
   justify-content: center;
+}
+
+/* PROJECT CARD */
+#project {
+  min-height: 100px;
+  min-width: 100px;
+  background-color: var(--project-dark);
+}
+
+#projectTitle {
+  background-color: var(--project-light);
 }
