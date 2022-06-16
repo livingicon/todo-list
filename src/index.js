@@ -10,7 +10,7 @@ const addProject = (function() {
     const defaultProject = document.createElement('div');
 
     defaultProject.setAttribute('id', 'project'); //use backticks to make id project1?
-    defaultProject.textContent = "Project One";
+    defaultProject.textContent = "PROJECT";
 
     projects.appendChild(defaultProject);
   }

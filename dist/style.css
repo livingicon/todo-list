@@ -2,16 +2,17 @@
 /* GENERAL */
 
 :root {
-  /* 
-  --primary-dark: #333;
-  --secondary-dark: #444;
-  --primary-light: #eee;
-  --secondary-light: #ddd;
-  */
+  
+  --primary-dark: rgb(0, 38, 53);
+  --secondary-dark: rgb(0, 56, 80);
+  --primary-light: #ddd;
+  --secondary-light: rgb(2, 83, 117);
+ 
 }
 
 html {
   font-size: 1rem;
+  color: var(--primary-light);
 }
 
 body {
@@ -30,7 +31,8 @@ body {
 /* HEADER */
 
 .header {
-  background-color: red;
+  background-color: var(--primary-dark);
+
 }
 
 /* BODY */
@@ -41,17 +43,17 @@ body {
 }
 
 .sidebar {
-  background-color: blue;
+  background-color: var(--secondary-dark);
 }
 
 .projects {
-  background-color: grey;
+  background-color: var(--secondary-light)
 }
 
 /* FOOTER */
 
 .footer {
-  background-color: orange;
+  background-color: var(--primary-dark);
   display: flex;
   justify-content: center;
 }
