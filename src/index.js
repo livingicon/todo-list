@@ -5,26 +5,32 @@ const addProject = (function() {
   const addDefaultProject = function(e) {
     const projects = document.getElementById('projects');
     const defaultProject = document.createElement('div');
-    const projectTitle = document.createElement('input');
+    const projectTitleInput = document.createElement('input');
     const addToDoBtn = document.createElement('button');
 
-    projectTitle.addEventListener('click', editProjectName);
+    projectTitleInput.addEventListener('keypress', editProjectName);
     addToDoBtn.addEventListener('click', test2);
 
-    defaultProject.setAttribute('id', 'project'); //use backticks to make id project1?
-    projectTitle.setAttribute('id', 'projectTitle')
-    projectTitle.setAttribute('type', 'text');
-    projectTitle.setAttribute('placeholder', 'Project Name')
+    defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
+    projectTitleInput.setAttribute('id', 'projectTitleInput')
+    projectTitleInput.setAttribute('type', 'text');
+    projectTitleInput.setAttribute('placeholder', 'Project Name')
     addToDoBtn.setAttribute('id', 'addToDoBtn');
-    addToDoBtn.textContent = "+ add to-do list item";
+    addToDoBtn.textContent = "+ add project to-do list item";
 
     projects.appendChild(defaultProject);
-    defaultProject.appendChild(projectTitle);
+    defaultProject.appendChild(projectTitleInput);
     defaultProject.appendChild(addToDoBtn);
   }
 
   const editProjectName = function(e) { 
-    console.log("click");
+    if(e.key === "Enter") {
+      const projectTitle = document.createElement('h3');
+      projectTitle.setAttribute('id', 'projectTitle');
+      projectTitle.innerHTML = `${e.target.value}`;
+      // projectTitleInput.remove();
+      defaultProject.replaceChild(projectTitle, projectTitleInput);
+    }
   };
 
   const test2 = function() {
@@ -40,5 +46,4 @@ const addProject = (function() {
 const addProjectBtn = document.getElementById('addProjectBtn');
 addProjectBtn.addEventListener('click', addProject.addDefaultProject);
 
-
-{/* <input type="text" id="myText" value="Some text..."></input> */}
+// need to separate out the change from h3 to input into different modules
