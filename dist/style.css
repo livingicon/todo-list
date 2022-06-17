@@ -3,15 +3,15 @@
 
 :root {
   /* general */
-  --primary-dark: #164e63;
-  --secondary-dark: #0e7490;
-  --primary-light: #ecfeff;
-  --secondary-light: #67e8f9;
+  --primary-dark: #262626;
+  --secondary-dark: #404040;
+  --primary-light: #e5e5e5;
+  --secondary-light: #a3a3a3;
   /* project card */
-  --project-dark: #1e293b;
-  --project-light: #475569;
-  --todo-dark: #94a3b8;
-  --todo-light: #f1f5f9;
+  --project-dark: #164e63;
+  --project-light: #0e7490;
+  --todo-dark: #ecfeff;
+  --todo-light: #67e8f9;
 }
 
 html {
@@ -57,20 +57,13 @@ body {
 }
 
 /* PROJECT CARD */
+
 #defaultProject {
-  min-height: 100px;
-  min-width: 100px;
   background-color: var(--project-light);
 }
 
 #projectTitleInput {
   display: block; 
-  /* font-size: 1.17em; 
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold; */
 }
 
 #projectTitle {
