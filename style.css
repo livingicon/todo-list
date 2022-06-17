@@ -57,19 +57,23 @@ body {
 }
 
 /* PROJECT CARD */
-#project {
+#defaultProject {
   min-height: 100px;
   min-width: 100px;
-  background-color: var(--project-dark);
+  background-color: var(--project-light);
+}
+
+#projectTitleInput {
+  display: block; 
+  /* font-size: 1.17em; 
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold; */
 }
 
 #projectTitle {
-  display: block; 
-  font-size: 1.17em; 
-  margin-top: 1em; 
-  margin-bottom: 1em; 
-  margin-left: 0; 
-  margin-right: 0; 
-  font-weight: bold;
-  background-color: var(--project-light);
+  background-color: var(--project-dark);
+  margin: 0;
 }
