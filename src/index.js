@@ -6,21 +6,16 @@ const addProject = (function() {
     const projects = document.getElementById('projects');
     const defaultProject = document.createElement('div');
     const projectTitleInput = document.createElement('input');
-    const addToDoBtn = document.createElement('button');
 
     projectTitleInput.addEventListener('keypress', editProjectName);
-    addToDoBtn.addEventListener('click', test2);
 
     defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
     projectTitleInput.setAttribute('id', 'projectTitleInput')
     projectTitleInput.setAttribute('type', 'text');
     projectTitleInput.setAttribute('placeholder', 'Project Name')
-    addToDoBtn.setAttribute('id', 'addToDoBtn');
-    addToDoBtn.textContent = "+ add project to-do list item";
 
     projects.appendChild(defaultProject);
     defaultProject.appendChild(projectTitleInput);
-    defaultProject.appendChild(addToDoBtn);
   }
 
   const editProjectName = function(e) { 
@@ -28,12 +23,20 @@ const addProject = (function() {
       const projectTitle = document.createElement('h3');
       projectTitle.setAttribute('id', 'projectTitle');
       projectTitle.innerHTML = `${e.target.value}`;
-      // projectTitleInput.remove();
       defaultProject.replaceChild(projectTitle, projectTitleInput);
+      addToDoBtn();
     }
   };
 
-  const test2 = function() {
+  const addToDoBtn = function() {
+    const addToDoBtn = document.createElement('button');
+    addToDoBtn.addEventListener('click', addToDoItem);
+    addToDoBtn.setAttribute('id', 'addToDoBtn');
+    addToDoBtn.textContent = "+ add project to-do list item";
+    defaultProject.appendChild(addToDoBtn);
+  };
+
+  const addToDoItem = function() {
     const toDoItem = document.createElement('input');
     //open modal
     console.log("add a todo item");
