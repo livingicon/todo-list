@@ -62,10 +62,6 @@ body {
   background-color: var(--project-light);
 }
 
-#projectTitleInput {
-  display: block; 
-}
-
 #projectTitle {
   background-color: var(--project-dark);
   margin: 0;
