@@ -55,7 +55,8 @@ const addProject = (function() {
   };
 
   const addToDoBtn = function() {
-    if(document.getElementById('addToDoBtn') === null) {
+    if(document.getElementById('addToDoBtn') === null && 
+    document.getElementById('toDoForm') === null) { 
       const addToDoBtn = document.createElement('button');
       addToDoBtn.addEventListener('click', addToDoItem);
       addToDoBtn.setAttribute('id', 'addToDoBtn');
