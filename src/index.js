@@ -1,8 +1,4 @@
-//logic for adding project, adding todo, and editing them?
-
 const addProject = (function() {
-  //should I put all of the const up here for all below functions?
-  
   const addDefaultProject = function(e) {
     const projects = document.getElementById('projects');
     const defaultProject = document.createElement('div');
@@ -29,23 +25,29 @@ const addProject = (function() {
       projectTitleForm.appendChild(projectTitleLabel);
       projectTitleForm.appendChild(projectTitleInput);
     } else if (defaultProject.firstChild !== null) {
-      console.log(e);
+      let nonRemovedFirstWordTitle = projectTitle.innerHTML;
       projectTitleInput.removeAttribute('placeholder');
-      projectTitleInput.setAttribute('value', `${projectTitle.innerHTML}`);
-
+      projectTitleInput.setAttribute('value', `${removeFirstWord(nonRemovedFirstWordTitle)}`);
       defaultProject.replaceChild(projectTitleForm, projectTitle);
       projectTitleForm.appendChild(projectTitleLabel);
       projectTitleForm.appendChild(projectTitleInput);
-      
     }
   };
+
+  function removeFirstWord(str) {
+    const indexOfSpace = str.indexOf(' ');
+    if (indexOfSpace === -1) {
+      return '';
+    }
+    return str.substring(indexOfSpace + 1);
+  }
 
   const inputProjectName = function(e) { 
     if(e.key === "Enter") {
       const projectTitle = document.createElement('h3');
       projectTitleLabel.remove();
       projectTitle.setAttribute('id', 'projectTitle');
-      projectTitle.innerHTML = `${e.target.value}`;
+      projectTitle.innerHTML = `Project: ${e.target.value}`;
       defaultProject.replaceChild(projectTitle, projectTitleForm);
       projectTitle.addEventListener('dblclick', addProjectTitleInput);
       addToDoBtn();
@@ -139,12 +141,6 @@ const addProject = (function() {
     toDoFormPrioritySelect.appendChild(priorityLater);
     defaultProject.appendChild(toDoFormSaveBtn);
   };
-
-
-
-
-
-
 
   return { addDefaultProject };
 })();
