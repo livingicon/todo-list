@@ -1,3 +1,23 @@
+// local storage that loads existing projects if they exist and establishes the storage array
+window.onload = function() {
+  myProjects = JSON.parse(localStorage.getItem('myProjects'));
+  if (myProjects === null) {
+    myProjects = []; //where projects are stored
+    console.log(myProjects);
+  }
+  // addProjects(); //not written yet
+};
+
+// constructor function?
+function Project(title, description, dueDate, priority) {
+  this.title = title;
+  this.description = description;
+  this.dueDate = dueDate;
+  this.priority = priority;
+}
+
+
+// adds project name input
 const addProject = (function() {
   const addDefaultProject = function(e) {
     const projects = document.getElementById('projects');
@@ -7,6 +27,7 @@ const addProject = (function() {
     addProjectTitleInput();
   }
 
+  // adds project name input
   function addProjectTitleInput(e) {
     const projectTitleForm = document.createElement('div');
     const projectTitleLabel = document.createElement('label');
@@ -19,11 +40,12 @@ const addProject = (function() {
     projectTitleInput.setAttribute('id', 'projectTitleInput');
     projectTitleInput.setAttribute('type', 'text');
     projectTitleInput.setAttribute('placeholder', 'Project Name');
-
+  // and adds the "add to-do item" button
     if (defaultProject.firstChild === null){
       defaultProject.appendChild(projectTitleForm);
       projectTitleForm.appendChild(projectTitleLabel);
       projectTitleForm.appendChild(projectTitleInput);
+  // unless the button is already there then it adds the input with the current value that needs edited
     } else if (defaultProject.firstChild !== null) {
       let nonRemovedFirstWordTitle = projectTitle.innerHTML;
       projectTitleInput.removeAttribute('placeholder');
@@ -34,6 +56,7 @@ const addProject = (function() {
     }
   };
 
+  // removes "project" from the project title for editing
   function removeFirstWord(str) {
     const indexOfSpace = str.indexOf(' ');
     if (indexOfSpace === -1) {
@@ -42,6 +65,7 @@ const addProject = (function() {
     return str.substring(indexOfSpace + 1);
   }
 
+  // replaces input with the updated project name on enter
   const inputProjectName = function(e) { 
     if(e.key === "Enter") {
       const projectTitle = document.createElement('h3');
@@ -51,9 +75,28 @@ const addProject = (function() {
       defaultProject.replaceChild(projectTitle, projectTitleForm);
       projectTitle.addEventListener('dblclick', addProjectTitleInput);
       addToDoBtn();
+      let myProjectTitle = e.target.value;
+      addTitleToArray(myProjectTitle);
+      console.log(myProjects);
     }
   };
 
+  // I just want it to work with title right now
+  const addTitleToArray = function(myProjectTitle) {
+    // 1. check if initial enter or edit enter
+    // 2. if initial enter then: 
+    myProjects.push(myProjectTitle);
+    setLocalStorage(); //adds it to local storage
+    // 3. if edit, then 
+    // splice or delete and replace or something
+    setLocalStorage();  //adds it to local storage
+  };
+
+ function setLocalStorage() {
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
+  };
+
+  // adds the todo button (if there isn't already one)
   const addToDoBtn = function() {
     if(document.getElementById('addToDoBtn') === null && 
     document.getElementById('toDoForm') === null) { 
@@ -65,6 +108,7 @@ const addProject = (function() {
     }
   };
 
+  // adds the todo form when to to do item button is pushed
   const addToDoItem = function() {
     const addToDoBtn = document.getElementById('addToDoBtn');
     const toDoForm = document.createElement('form');
@@ -149,5 +193,10 @@ const addProject = (function() {
 const addProjectBtn = document.getElementById('addProjectBtn');
 addProjectBtn.addEventListener('click', addProject.addDefaultProject);
 
-// need to separate out the change from h3 to input into different modules
-// when project name added it needs to go to sidebar
+// TO DO: 
+// --figure out constructor
+// --figure out how to display each element after save and then edit
+// --when project name added it needs to go to sidebar
+// --expand and minimize displayed projects
+// --sort projects (sidebar)
+// --separate into modules
