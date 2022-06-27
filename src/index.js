@@ -107,21 +107,28 @@ const addProjectToDoForm = (function() {
 })();
 
 const addProject = function(e){
-  const projectToDoForm = document.getElementById('toDoForm');
+  e.preventDefault()
+
   const project = document.getElementById('project').value;
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
   const date = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
-  e.preventDefault()
+
   console.log(project);
   console.log(title);
   console.log(description);
   console.log(date);
   console.log(priority);
+  
+  removeForm();
+};
 
+const removeForm = function(){
+  const projectToDoForm = document.getElementById('toDoForm');
   projectToDoForm.remove();
 };
+
 
 // FACTORY FUNCTION
 // const projectToDoFactory = 
