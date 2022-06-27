@@ -8,6 +8,7 @@
 //   // addProjects(); //not written yet
 // };
 
+let myProjects = [];
 
 // CREATE PROJECT TODO FORM
 const addProjectToDoForm = (function() {
@@ -106,27 +107,45 @@ const addProjectToDoForm = (function() {
   return { addForm };
 })();
 
+function Project(project, title, description, date, priority) {
+  this.project = project;
+  this.title = title;
+  this.description = description;
+  this.date = date;
+  this.priority = priority;
+};
+
 const addProject = function(e){
   e.preventDefault()
-
   const project = document.getElementById('project').value;
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
   const date = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
-
-  console.log(project);
-  console.log(title);
-  console.log(description);
-  console.log(date);
-  console.log(priority);
-  
-  removeForm();
+  if (!project || !title || !description || !date) {
+    alert("All fields are required to add a project and todo list item.");
+    return false;
+  } else {
+    let newProject = new Project(project, title, description, date, priority);
+    myProjects.push(newProject);
+    addProjects(newProject); 
+  }
 };
 
-const removeForm = function(){
-  const projectToDoForm = document.getElementById('toDoForm');
-  projectToDoForm.remove();
+const addProjects = function(newProject){
+  const projects = document.getElementById('projects');
+  projects.innerHTML = "";
+  myProjects.forEach(element => generateProjectCards(element));
+};
+
+const generateProjectCards = function(stuff) {
+  const projects = document.getElementById('projects');
+  const card = document.createElement('div');
+  const project = document.createElement('p');
+  project.textContent = `Project: ${stuff.project}`;
+
+  projects.append(card);
+  card.append(project);
 };
 
 
