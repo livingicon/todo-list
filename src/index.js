@@ -1,145 +1,57 @@
 // local storage that loads existing projects if they exist and establishes the storage array
-window.onload = function() {
-  myProjects = JSON.parse(localStorage.getItem('myProjects'));
-  if (myProjects === null) {
-    myProjects = []; //where projects are stored
-    console.log(myProjects);
-  }
-  // addProjects(); //not written yet
-};
-
-// constructor function?
-function Project(title, description, dueDate, priority) {
-  this.title = title;
-  this.description = description;
-  this.dueDate = dueDate;
-  this.priority = priority;
-}
+// window.onload = function() {
+//   myProjects = JSON.parse(localStorage.getItem('myProjects'));
+//   if (myProjects === null) {
+//     myProjects = []; //where projects are stored
+//     console.log(myProjects);
+//   }
+//   // addProjects(); //not written yet
+// };
 
 
-// adds project name input
-const addProject = (function() {
-  const addDefaultProject = function(e) {
+// CREATE PROJECT TODO FORM
+const addProjectToDoForm = (function() {
+
+  const addForm = function() {
     const projects = document.getElementById('projects');
-    const defaultProject = document.createElement('div');
-    defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
-    projects.appendChild(defaultProject);
-    addProjectTitleInput();
-  }
-
-  // adds project name input
-  function addProjectTitleInput(e) {
-    const projectTitleForm = document.createElement('div');
-    const projectTitleLabel = document.createElement('label');
-    const projectTitleInput = document.createElement('input');
-    projectTitleForm.setAttribute('id', 'projectTitleForm');
-    projectTitleLabel.setAttribute('id', 'projectTitleLabel');
-    projectTitleInput.addEventListener('keypress', inputProjectName);
-    projectTitleLabel.setAttribute('for', 'projectTitleInput');
-    projectTitleLabel.textContent = "Project Name:";
-    projectTitleInput.setAttribute('id', 'projectTitleInput');
-    projectTitleInput.setAttribute('type', 'text');
-    projectTitleInput.setAttribute('placeholder', 'Project Name');
-  // and adds the "add to-do item" button
-    if (defaultProject.firstChild === null){
-      defaultProject.appendChild(projectTitleForm);
-      projectTitleForm.appendChild(projectTitleLabel);
-      projectTitleForm.appendChild(projectTitleInput);
-  // unless the button is already there then it adds the input with the current value that needs edited
-    } else if (defaultProject.firstChild !== null) {
-      let nonRemovedFirstWordTitle = projectTitle.innerHTML;
-      projectTitleInput.removeAttribute('placeholder');
-      projectTitleInput.setAttribute('value', `${removeFirstWord(nonRemovedFirstWordTitle)}`);
-      defaultProject.replaceChild(projectTitleForm, projectTitle);
-      projectTitleForm.appendChild(projectTitleLabel);
-      projectTitleForm.appendChild(projectTitleInput);
-    }
-  };
-
-  // removes "project" from the project title for editing
-  function removeFirstWord(str) {
-    const indexOfSpace = str.indexOf(' ');
-    if (indexOfSpace === -1) {
-      return '';
-    }
-    return str.substring(indexOfSpace + 1);
-  }
-
-  // replaces input with the updated project name on enter
-  const inputProjectName = function(e) { 
-    if(e.key === "Enter") {
-      const projectTitle = document.createElement('h3');
-      projectTitleLabel.remove();
-      projectTitle.setAttribute('id', 'projectTitle');
-      projectTitle.innerHTML = `Project: ${e.target.value}`;
-      defaultProject.replaceChild(projectTitle, projectTitleForm);
-      projectTitle.addEventListener('dblclick', addProjectTitleInput);
-      addToDoBtn();
-      let myProjectTitle = e.target.value;
-      addTitleToArray(myProjectTitle);
-      console.log(myProjects);
-    }
-  };
-
-  // I just want it to work with title right now
-  const addTitleToArray = function(myProjectTitle) {
-    // 1. check if initial enter or edit enter
-    // 2. if initial enter then: 
-    myProjects.push(myProjectTitle);
-    setLocalStorage(); //adds it to local storage
-    // 3. if edit, then 
-    // splice or delete and replace or something
-    setLocalStorage();  //adds it to local storage
-  };
-
- function setLocalStorage() {
-    localStorage.setItem('myProjects', JSON.stringify(myProjects));
-  };
-
-  // adds the todo button (if there isn't already one)
-  const addToDoBtn = function() {
-    if(document.getElementById('addToDoBtn') === null && 
-    document.getElementById('toDoForm') === null) { 
-      const addToDoBtn = document.createElement('button');
-      addToDoBtn.addEventListener('click', addToDoItem);
-      addToDoBtn.setAttribute('id', 'addToDoBtn');
-      addToDoBtn.textContent = "+ add to-do item";
-      defaultProject.appendChild(addToDoBtn);
-    }
-  };
-
-  // adds the todo form when to to do item button is pushed
-  const addToDoItem = function() {
-    const addToDoBtn = document.getElementById('addToDoBtn');
-    const toDoForm = document.createElement('form');
-    toDoForm.setAttribute('id', 'toDoForm');
-
+    const projectToDoForm = document.createElement('form');
+    projectToDoForm.setAttribute('id', 'toDoForm');
+    // project name
+    const toDoFormProjectDiv = document.createElement('div');
+    const toDoFormProjectLabel = document.createElement('label');
+    const toDoFormProjectInput = document.createElement('input');
+    toDoFormProjectLabel.setAttribute('for', 'project');
+    toDoFormProjectLabel.textContent = "Project Name";
+    toDoFormProjectInput.setAttribute('type', 'text');
+    toDoFormProjectInput.setAttribute('id', 'project');
+    toDoFormProjectInput.setAttribute('placeholder', 'project name')
+    // todo title
     const toDoFormTitleDiv = document.createElement('div');
     const toDoFormTitleLabel = document.createElement('label');
     const toDoFormTitleInput = document.createElement('input');
     toDoFormTitleLabel.setAttribute('for', 'title');
-    toDoFormTitleLabel.textContent = "Title";
+    toDoFormTitleLabel.textContent = "To Do Item Title";
     toDoFormTitleInput.setAttribute('type', 'text');
     toDoFormTitleInput.setAttribute('id', 'title');
     toDoFormTitleInput.setAttribute('placeholder', 'title')
-
+    // todo description
     const toDoFormDescriptionDiv = document.createElement('div');
     const toDoFormDescriptionLabel = document.createElement('label');
     const toDoFormDescriptionInput = document.createElement('input');
     toDoFormDescriptionLabel.setAttribute('for', 'descripton');
-    toDoFormDescriptionLabel.textContent = "Description";
+    toDoFormDescriptionLabel.textContent = "To Do Item Description";
     toDoFormDescriptionInput.setAttribute('type', 'text');
-    toDoFormDescriptionInput.setAttribute('id', 'descripton');
+    toDoFormDescriptionInput.setAttribute('id', 'description');
     toDoFormDescriptionInput.setAttribute('placeholder', 'description')
-
+    // todo due date
     const toDoFormDueDateDiv = document.createElement('div');
     const toDoFormDueDateLabel = document.createElement('label');
     const toDoFormDueDateInput = document.createElement('input');
     toDoFormDueDateLabel.setAttribute('for', 'due-date');
-    toDoFormDueDateLabel.textContent = "Due Date";
+    toDoFormDueDateLabel.textContent = "To Do Item Due Date";
     toDoFormDueDateInput.setAttribute('type', 'date');
     toDoFormDueDateInput.setAttribute('id', 'due-date');
-
+    // todo priority
     const toDoFormPriorityDiv = document.createElement('div');
     const toDoFormPriorityLabel = document.createElement('label');
     const toDoFormPrioritySelect = document.createElement('select');
@@ -147,7 +59,7 @@ const addProject = (function() {
     const prioritySoon = document.createElement('option');
     const priorityLater = document.createElement('option');
     toDoFormPriorityLabel.setAttribute('for', 'priority')
-    toDoFormPriorityLabel.textContent = "Priority";
+    toDoFormPriorityLabel.textContent = "To Do Item Priority";
     toDoFormPrioritySelect.setAttribute('id', 'priority');
     priorityNow.setAttribute('value', 'urgent');
     priorityNow.setAttribute('id', 'priorityNow');
@@ -161,42 +73,77 @@ const addProject = (function() {
     priorityLater.setAttribute('id', 'priorityLater');
     priorityLater.textContent = "Later";
     priorityLater.style.backgroundColor = 'green';
-
+    // todo save button
     const toDoFormSaveBtn = document.createElement('button');
-    toDoFormSaveBtn.setAttribute('id', 'toDoSaveBtn');
+    toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
     toDoFormSaveBtn.setAttribute('type', 'submit');
     toDoFormSaveBtn.textContent = "save";
-    
-    addToDoBtn.remove();
-    defaultProject.appendChild(toDoForm);
-    toDoForm.appendChild(toDoFormTitleDiv);
+    // append
+    projects.appendChild(projectToDoForm);
+    projectToDoForm.appendChild(toDoFormProjectDiv);
+    toDoFormProjectDiv.appendChild(toDoFormProjectLabel);
+    toDoFormProjectDiv.appendChild(toDoFormProjectInput);
+    projectToDoForm.appendChild(toDoFormTitleDiv);
     toDoFormTitleDiv.appendChild(toDoFormTitleLabel);
     toDoFormTitleDiv.appendChild(toDoFormTitleInput);
-    toDoForm.appendChild(toDoFormDescriptionDiv);
+    projectToDoForm.appendChild(toDoFormDescriptionDiv);
     toDoFormDescriptionDiv.appendChild(toDoFormDescriptionLabel);
     toDoFormDescriptionDiv.appendChild(toDoFormDescriptionInput);
-    toDoForm.appendChild(toDoFormDueDateDiv);
+    projectToDoForm.appendChild(toDoFormDueDateDiv);
     toDoFormDueDateDiv.appendChild(toDoFormDueDateLabel);
     toDoFormDueDateDiv.appendChild(toDoFormDueDateInput);
-    toDoForm.appendChild(toDoFormPriorityDiv);
+    projectToDoForm.appendChild(toDoFormPriorityDiv);
     toDoFormPriorityDiv.appendChild(toDoFormPriorityLabel);
     toDoFormPriorityDiv.appendChild(toDoFormPrioritySelect);
     toDoFormPrioritySelect.appendChild(priorityNow);
     toDoFormPrioritySelect.appendChild(prioritySoon);
     toDoFormPrioritySelect.appendChild(priorityLater);
-    defaultProject.appendChild(toDoFormSaveBtn);
-  };
+    projectToDoForm.appendChild(toDoFormSaveBtn);
+    
+    toDoFormSaveBtn.addEventListener('click', addProject);
+   };
 
-  return { addDefaultProject };
+  return { addForm };
 })();
 
-const addProjectBtn = document.getElementById('addProjectBtn');
-addProjectBtn.addEventListener('click', addProject.addDefaultProject);
+const addProject = function(e){
+  const projectToDoForm = document.getElementById('toDoForm');
+  const project = document.getElementById('project').value;
+  const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
+  const date = document.getElementById('due-date').value;
+  const priority = document.getElementById('priority').value;
+  e.preventDefault()
+  console.log(project);
+  console.log(title);
+  console.log(description);
+  console.log(date);
+  console.log(priority);
 
-// TO DO: 
-// --figure out constructor
-// --figure out how to display each element after save and then edit
-// --when project name added it needs to go to sidebar
-// --expand and minimize displayed projects
-// --sort projects (sidebar)
-// --separate into modules
+  projectToDoForm.remove();
+};
+
+// FACTORY FUNCTION
+// const projectToDoFactory = 
+// (project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
+//   const addProject = () => console.log('Josh');
+//   return { project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority, 
+//     addProject };
+// };
+
+// //examples of using above factory function
+// const garageProject = projectToDoFactory('garage', 'organize tool chest', 'the tool chest needs organized', 27, 'soon');
+// console.log(garageProject.toDoDescription);
+// garageProject.addProject();
+
+const addProjectBtn = document.getElementById('addProjectBtn');
+addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
+
+// // adds project name input
+//   const addDefaultProject = function(e) {
+//     const projects = document.getElementById('projects');
+//     const defaultProject = document.createElement('div');
+//     defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
+//     projects.appendChild(defaultProject);
+//     addProjectTitleInput();
+//   }
