@@ -44,10 +44,6 @@ body {
   background-color: var(--secondary-dark);
 }
 
-.projects {
-  background-color: var(--secondary-light)
-}
-
 /* FOOTER */
 
 .footer {
@@ -56,13 +52,10 @@ body {
   justify-content: center;
 }
 
-/* PROJECT CARD */
+/* Project Form */
 
-#defaultProject {
-  background-color: var(--project-light);
-}
 
-#projectTitle {
+#toDoForm {
   background-color: var(--project-dark);
   margin: 0;
 }
