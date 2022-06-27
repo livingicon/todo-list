@@ -123,16 +123,16 @@ const addProject = function(e){
   const date = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
   if (!project || !title || !description || !date) {
-    alert("All fields are required to add a project and todo list item.");
+    alert("All fields are required to add a project and project todo list item.");
     return false;
   } else {
     let newProject = new Project(project, title, description, date, priority);
     myProjects.push(newProject);
-    addProjects(newProject); 
+    addAllProjects(newProject); 
   }
 };
 
-const addProjects = function(newProject){
+const addAllProjects = function(newProject){
   const projects = document.getElementById('projects');
   projects.innerHTML = "";
   myProjects.forEach(element => generateProjectCards(element));
@@ -141,11 +141,25 @@ const addProjects = function(newProject){
 const generateProjectCards = function(stuff) {
   const projects = document.getElementById('projects');
   const card = document.createElement('div');
-  const project = document.createElement('p');
-  project.textContent = `Project: ${stuff.project}`;
+  const cardProject = document.createElement('div');
+  const cardToDoList = document.createElement('div');
+  const projectTitle = document.createElement('h2');
+  const toDoListHeader = document.createElement('h4')
+  const toDoItem = document.createElement('h6');
+
+  cardToDoList.setAttribute('id', 'cardToDoList')
+  cardToDoList.style.backgroundColor = 'green'; //make color dynamically change
+  projectTitle.textContent = `Project: ${stuff.project}`;
+  toDoListHeader.textContent = `${stuff.project} To Do List`;
+  toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
+  Goal Completion: ${stuff.date}`;
 
   projects.append(card);
-  card.append(project);
+  card.append(cardProject);
+  cardProject.append(projectTitle);
+  card.append(cardToDoList);
+  cardToDoList.append(toDoListHeader);
+  cardToDoList.append(toDoItem);
 };
 
 
