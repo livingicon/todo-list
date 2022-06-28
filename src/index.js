@@ -1,14 +1,14 @@
-// local storage that loads existing projects if they exist and establishes the storage array
-// window.onload = function() {
-//   myProjects = JSON.parse(localStorage.getItem('myProjects'));
-//   if (myProjects === null) {
-//     myProjects = []; //where projects are stored
-//     console.log(myProjects);
-//   }
-//   // addProjects(); //not written yet
-// };
+const addProjectBtn = document.getElementById('addProjectBtn');
 
-let myProjects = [];
+// local storage that loads existing projects if they exist and establishes the storage array
+window.onload = function() {
+  myProjects = JSON.parse(localStorage.getItem('myProjects'));
+  if (myProjects === null) {
+    myProjects = []; //where projects are stored
+    console.log(myProjects);
+  }
+  addAllProjects(); //not written yet
+};
 
 // CREATE PROJECT TODO FORM
 const addProjectToDoForm = (function() {
@@ -128,17 +128,20 @@ const addProject = function(e){
   } else {
     let newProject = new Project(project, title, description, date, priority);
     myProjects.push(newProject);
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
     addAllProjects(newProject); 
   }
 };
 
 const addAllProjects = function(newProject){
   const projects = document.getElementById('projects');
-  projects.innerHTML = "";
+  projects.innerHTML = ""; //clears existing projects do avoid doubles
   myProjects.forEach(element => generateProjectCards(element));
 };
 
 const generateProjectCards = function(stuff){
+  let priority = stuff.priority;
+
   const projects = document.getElementById('projects');
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
@@ -147,12 +150,12 @@ const generateProjectCards = function(stuff){
   const toDoListHeader = document.createElement('h4')
   const toDoItem = document.createElement('h6');
 
-  cardToDoList.setAttribute('id', 'cardToDoList')
+  card.setAttribute('id', 'card');
   projectTitle.textContent = `Project: ${stuff.project}`;
+  cardToDoList.setAttribute('id', 'cardToDoList')
   toDoListHeader.textContent = `${stuff.project} To Do List`;
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
-  let priority = stuff.priority;
 
   projects.append(card);
   card.append(cardProject);
@@ -160,10 +163,10 @@ const generateProjectCards = function(stuff){
   card.append(cardToDoList);
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
-
-  priorityColor(priority);
+  priorityColor(priority); // changes color of todo item
 };
 
+// changing color of first one each time...
 const priorityColor = function(priority){
   const cardToDoList = document.getElementById('cardToDoList');
   if (priority === 'urgent'){
@@ -175,13 +178,7 @@ const priorityColor = function(priority){
   }
 };
 
-const addProjectBtn = document.getElementById('addProjectBtn');
 addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
-
-// TODOLIST:
-// 1. why does it not maintain the color of them all?
-
-
 
 
 // FACTORY FUNCTION?
