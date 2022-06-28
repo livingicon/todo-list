@@ -138,7 +138,7 @@ const addAllProjects = function(newProject){
   myProjects.forEach(element => generateProjectCards(element));
 };
 
-const generateProjectCards = function(stuff) {
+const generateProjectCards = function(stuff){
   const projects = document.getElementById('projects');
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
@@ -148,11 +148,11 @@ const generateProjectCards = function(stuff) {
   const toDoItem = document.createElement('h6');
 
   cardToDoList.setAttribute('id', 'cardToDoList')
-  cardToDoList.style.backgroundColor = 'green'; //make color dynamically change
   projectTitle.textContent = `Project: ${stuff.project}`;
   toDoListHeader.textContent = `${stuff.project} To Do List`;
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
+  let priority = stuff.priority;
 
   projects.append(card);
   card.append(cardProject);
@@ -160,10 +160,31 @@ const generateProjectCards = function(stuff) {
   card.append(cardToDoList);
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
+
+  priorityColor(priority);
 };
 
+const priorityColor = function(priority){
+  const cardToDoList = document.getElementById('cardToDoList');
+  if (priority === 'urgent'){
+    cardToDoList.style.backgroundColor = 'red';
+  } else if (priority === "soon"){
+    cardToDoList.style.backgroundColor = 'yellow';
+  } else {
+    cardToDoList.style.backgroundColor = 'green';
+  }
+};
 
-// FACTORY FUNCTION
+const addProjectBtn = document.getElementById('addProjectBtn');
+addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
+
+// TODOLIST:
+// 1. why does it not maintain the color of them all?
+
+
+
+
+// FACTORY FUNCTION?
 // const projectToDoFactory = 
 // (project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
 //   const addProject = () => console.log('Josh');
@@ -175,10 +196,6 @@ const generateProjectCards = function(stuff) {
 // const garageProject = projectToDoFactory('garage', 'organize tool chest', 'the tool chest needs organized', 27, 'soon');
 // console.log(garageProject.toDoDescription);
 // garageProject.addProject();
-
-const addProjectBtn = document.getElementById('addProjectBtn');
-addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
-
 // // adds project name input
 //   const addDefaultProject = function(e) {
 //     const projects = document.getElementById('projects');
