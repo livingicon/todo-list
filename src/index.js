@@ -1,13 +1,12 @@
 const addProjectBtn = document.getElementById('addProjectBtn');
 
-// local storage that loads existing projects if they exist and establishes the storage array
+// LOCAL STORAGE
 window.onload = function() {
   myProjects = JSON.parse(localStorage.getItem('myProjects'));
   if (myProjects === null) {
-    myProjects = []; //where projects are stored
-    console.log(myProjects);
+    myProjects = [];
   }
-  addAllProjects(); //not written yet
+  addAllProjects();
 };
 
 // CREATE PROJECT TODO FORM
@@ -135,13 +134,11 @@ const addProject = function(e){
 
 const addAllProjects = function(newProject){
   const projects = document.getElementById('projects');
-  projects.innerHTML = ""; //clears existing projects do avoid doubles
+  projects.innerHTML = ""; //clears existing projects to avoid doubles
   myProjects.forEach(element => generateProjectCards(element));
 };
 
 const generateProjectCards = function(stuff){
-  let priority = stuff.priority;
-
   const projects = document.getElementById('projects');
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
@@ -154,6 +151,7 @@ const generateProjectCards = function(stuff){
   projectTitle.textContent = `Project: ${stuff.project}`;
   cardToDoList.setAttribute('id', 'cardToDoList')
   toDoListHeader.textContent = `${stuff.project} To Do List`;
+  toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
 
@@ -163,18 +161,13 @@ const generateProjectCards = function(stuff){
   card.append(cardToDoList);
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
-  priorityColor(priority); // changes color of todo item
-};
 
-// changing color of first one each time...
-const priorityColor = function(priority){
-  const cardToDoList = document.getElementById('cardToDoList');
-  if (priority === 'urgent'){
-    cardToDoList.style.backgroundColor = 'red';
-  } else if (priority === "soon"){
-    cardToDoList.style.backgroundColor = 'yellow';
+  if (stuff.priority === "urgent") {
+    toDoItem.style.backgroundColor = 'red';
+  } else if (stuff.priority === "soon") {
+    toDoItem.style.backgroundColor = 'yellow';
   } else {
-    cardToDoList.style.backgroundColor = 'green';
+    toDoItem.style.backgroundColor = 'green';
   }
 };
 
@@ -188,7 +181,6 @@ addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 //   return { project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority, 
 //     addProject };
 // };
-
 // //examples of using above factory function
 // const garageProject = projectToDoFactory('garage', 'organize tool chest', 'the tool chest needs organized', 27, 'soon');
 // console.log(garageProject.toDoDescription);
@@ -200,4 +192,4 @@ addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 //     defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
 //     projects.appendChild(defaultProject);
 //     addProjectTitleInput();
-//   }
+//   }1
