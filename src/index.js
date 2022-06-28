@@ -11,9 +11,10 @@ window.onload = function() {
 
 // CREATE PROJECT TODO FORM
 const addProjectToDoForm = (function() {
-
+  // How can we remove the cards when the form comes up?
   const addForm = function() {
     const projects = document.getElementById('projects');
+    projects.innerHTML = ""; // removes projects so only form is visible
     const projectToDoForm = document.createElement('form');
     projectToDoForm.setAttribute('id', 'toDoForm');
     // project name
@@ -64,20 +65,22 @@ const addProjectToDoForm = (function() {
     priorityNow.setAttribute('value', 'urgent');
     priorityNow.setAttribute('id', 'priorityNow');
     priorityNow.textContent = "Urgent";
-    priorityNow.style.backgroundColor = 'red';
+    priorityNow.style.backgroundColor = 'var(--urgent)';
     prioritySoon.setAttribute('value', 'soon');
     prioritySoon.setAttribute('id', 'prioritySoon');
     prioritySoon.textContent = "Soon";
-    prioritySoon.style.backgroundColor = 'yellow';
+    prioritySoon.style.backgroundColor = 'var(--soon)';
     priorityLater.setAttribute('value', 'later');
     priorityLater.setAttribute('id', 'priorityLater');
     priorityLater.textContent = "Later";
-    priorityLater.style.backgroundColor = 'green';
+    priorityLater.style.backgroundColor = 'var(--later)';
     // todo save button
     const toDoFormSaveBtn = document.createElement('button');
     toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
     toDoFormSaveBtn.setAttribute('type', 'submit');
     toDoFormSaveBtn.textContent = "save";
+    // ADD TO DO CANCEL BUTTON
+
     // append
     projects.appendChild(projectToDoForm);
     projectToDoForm.appendChild(toDoFormProjectDiv);
@@ -148,8 +151,10 @@ const generateProjectCards = function(stuff){
   const toDoItem = document.createElement('h6');
 
   card.setAttribute('id', 'card');
+  projectTitle.setAttribute('id', 'projectTitle');
   projectTitle.textContent = `Project: ${stuff.project}`;
   cardToDoList.setAttribute('id', 'cardToDoList')
+  toDoListHeader.setAttribute('id', 'toDoListHeader');
   toDoListHeader.textContent = `${stuff.project} To Do List`;
   toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
@@ -163,33 +168,25 @@ const generateProjectCards = function(stuff){
   cardToDoList.append(toDoItem);
 
   if (stuff.priority === "urgent") {
-    toDoItem.style.backgroundColor = 'red';
+    toDoItem.style.backgroundColor = 'var(--urgent)';
   } else if (stuff.priority === "soon") {
-    toDoItem.style.backgroundColor = 'yellow';
+    toDoItem.style.backgroundColor = 'var(--soon)';
   } else {
-    toDoItem.style.backgroundColor = 'green';
+    toDoItem.style.backgroundColor = 'var(--later)';
   }
 };
 
 addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 
 
-// FACTORY FUNCTION?
-// const projectToDoFactory = 
-// (project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
-//   const addProject = () => console.log('Josh');
-//   return { project, toDoTitle, toDoDescription, toDoDueDate, toDoPriority, 
-//     addProject };
-// };
-// //examples of using above factory function
-// const garageProject = projectToDoFactory('garage', 'organize tool chest', 'the tool chest needs organized', 27, 'soon');
-// console.log(garageProject.toDoDescription);
-// garageProject.addProject();
-// // adds project name input
-//   const addDefaultProject = function(e) {
-//     const projects = document.getElementById('projects');
-//     const defaultProject = document.createElement('div');
-//     defaultProject.setAttribute('id', 'defaultProject'); //use backticks to make id project1?
-//     projects.appendChild(defaultProject);
-//     addProjectTitleInput();
-//   }1
+// TO DO
+// - factory function?
+// - add title on sidebar
+// - make sidebar title clickable
+// - add button below toDoItem to add another to do item
+// - add form cancel button
+// - editing todos
+// - marking todo item as complete
+// - deleting todo items
+// - expand and minimize?
+// - add priority key (sidebar)

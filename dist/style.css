@@ -12,6 +12,10 @@
   --project-light: #0e7490;
   --todo-dark: #ecfeff;
   --todo-light: #67e8f9;
+  /* priority key */
+  --urgent: #dc2626;
+  --soon: #d97706;
+  --later: #65a30d;
 }
 
 html {
@@ -53,6 +57,24 @@ body {
 
 /* CARD */
 
+#card {
+  max-width: 300px;
+  background-color: var(--project-light);
+  margin: 20px;
+}
+
+#projectTitle {
+  background-color: var(--project-dark);
+  margin: 0;
+}
+
+#toDoListHeader {
+  margin: 0;
+}
+
+#toDoItem {
+  margin: 0;
+}
 
 /* FOOTER */
 
