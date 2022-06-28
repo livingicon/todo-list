@@ -57,7 +57,9 @@ const addAllProjects = function(newProject){
 };
 
 const generateProjectCards = function(stuff){
-  const projects = document.getElementById('projects');
+  const projectList = document.getElementById('projectList'); // sidebar list
+  const projects = document.getElementById('projects'); // projects
+
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
   const cardToDoList = document.createElement('div');
@@ -81,6 +83,9 @@ const generateProjectCards = function(stuff){
   card.append(cardToDoList);
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
+  //sidebar
+  projectList.append(projectTitle); //change sidebar style!!
+  // make them all event listeners?
 
   if (stuff.priority === "urgent") {
     toDoItem.style.backgroundColor = 'var(--urgent)';
@@ -98,6 +103,7 @@ const generateProjectCards = function(stuff){
 
 // -----loadApp File-----
 addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
+
 
 export default addProject;
 
