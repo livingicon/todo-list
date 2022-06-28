@@ -99,6 +99,8 @@ const generateProjectCards = function(stuff){
 // -----loadApp File-----
 addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 
+export default addProject;
+
 
 // TO DO
 // - factory function?

@@ -1,6 +1,7 @@
-// CREATE PROJECT TODO FORM
+import addProject from "./index.js";
+
 const addProjectToDoForm = (function() {
-  // How can we remove the cards when the form comes up?
+
   const addForm = function() {
     const projects = document.getElementById('projects');
     projects.innerHTML = ""; // removes projects so only form is visible
