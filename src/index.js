@@ -84,7 +84,7 @@ const generateProjectCards = function(stuff){
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
   //sidebar
-  projectList.append(projectTitle); //change sidebar style!!
+  projectList.append(projectTitle);
   // make them all event listeners?
 
   if (stuff.priority === "urgent") {
