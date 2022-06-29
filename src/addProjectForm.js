@@ -1,8 +1,9 @@
-import {addProject, addAllProjects} from "./index.js";
+import {addProject, addAllProjects, addToDoItem} from "./index.js";
 
 const addProjectToDoForm = (function() {
 
   const addForm = function(e) {
+    let position = e.target.getAttribute('data-position');
     const projects = document.getElementById('projects');
     projects.innerHTML = ""; // removes projects so only form is visible
     const projectToDoForm = document.createElement('form');
@@ -69,6 +70,8 @@ const addProjectToDoForm = (function() {
     const toDoFormSaveBtn = document.createElement('button');
     toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
     toDoFormSaveBtn.setAttribute('type', 'submit');
+    toDoFormSaveBtn.setAttribute('data-position', `${position}`);
+    //trying to add here
     toDoFormSaveBtn.textContent = "save";
     toDoFormSaveBtn.style.backgroundColor = "var(--later)"
     // todo cancel button
@@ -111,11 +114,6 @@ const addProjectToDoForm = (function() {
     }
     //may need to change faddAllProjects function for individual project view
     toDoFormCancelBtn.addEventListener('click', addAllProjects);
-  };
-  
-  const addToDoItem = function(e){
-    e.preventDefault();
-    console.log("working");
   };
 
   return { addForm };

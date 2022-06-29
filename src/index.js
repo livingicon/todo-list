@@ -35,7 +35,7 @@ const addProject = function(e){
   const date = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
   if (!project || !title || !description || !date) {
-    alert("All fields are required to add a project and project todo list item.");
+    alert("All fields are required to add a project and project todo item.");
     return false;
   } else {
     let newProject = new Project(project, title, description, date, priority);
@@ -45,7 +45,24 @@ const addProject = function(e){
   }
 };
 
-
+//must find that project, add to JSON, and add to DOM on it
+const addToDoItem = function(e){
+  e.preventDefault();
+  const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
+  const date = document.getElementById('due-date').value;
+  const priority = document.getElementById('priority').value;
+  if (!title || !description || !date) {
+    alert("All fields are required to add todo item.");
+    return false;
+  } else {
+    console.log(e.target.getAttribute('data-position')); //working
+    // let newProject = new Project(project, title, description, date, priority);
+    // myProjects.push(newProject);
+    // localStorage.setItem('myProjects', JSON.stringify(myProjects));
+    // addAllProjects(newProject); 
+  }
+};
 
 
 
@@ -82,6 +99,7 @@ const generateProjectCards = function(stuff){
   Goal Completion: ${stuff.date}`;
   addToDoBtn.setAttribute('id', 'addToDoBtn');
   addToDoBtn.setAttribute('type', 'submit');
+  addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(stuff)}`); // added data-position here
   addToDoBtn.textContent = "+add todo item";
   projectTitleSidebar.textContent = `${stuff.project}`;
   projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
@@ -116,7 +134,8 @@ addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 
 export {
   addProject,
-  addAllProjects
+  addAllProjects,
+  addToDoItem
 };
 
 // TO DO
