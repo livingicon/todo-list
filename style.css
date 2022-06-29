@@ -37,6 +37,12 @@ body {
 
 }
 
+/* SIDEBAR */
+
+#projectTitleSidebar {
+  margin: 3px 10px;
+}
+
 /* BODY */
 
 .body {
@@ -46,11 +52,6 @@ body {
 
 .sidebar {
   background-color: var(--secondary-dark);
-}
-
-.sidebar #projectTitle {
-  background-color: var(--secondary-dark);
-  font-size: .7rem;
 }
 
 /* PROJECT FORM */
