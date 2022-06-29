@@ -2,7 +2,7 @@ import {addProject, addAllProjects} from "./index.js";
 
 const addProjectToDoForm = (function() {
 
-  const addForm = function() {
+  const addForm = function(e) {
     const projects = document.getElementById('projects');
     projects.innerHTML = ""; // removes projects so only form is visible
     const projectToDoForm = document.createElement('form');
@@ -11,6 +11,7 @@ const addProjectToDoForm = (function() {
     const toDoFormProjectDiv = document.createElement('div');
     const toDoFormProjectLabel = document.createElement('label');
     const toDoFormProjectInput = document.createElement('input');
+    toDoFormProjectDiv.setAttribute('id', 'toDoFormProjectDiv');
     toDoFormProjectLabel.setAttribute('for', 'project');
     toDoFormProjectLabel.textContent = "Project Name";
     toDoFormProjectInput.setAttribute('type', 'text');
@@ -79,9 +80,11 @@ const addProjectToDoForm = (function() {
 
     // append
     projects.appendChild(projectToDoForm);
-    projectToDoForm.appendChild(toDoFormProjectDiv);
-    toDoFormProjectDiv.appendChild(toDoFormProjectLabel);
-    toDoFormProjectDiv.appendChild(toDoFormProjectInput);
+    if (e.target.id === "addProjectBtn"){ //only adds for addProjectBtn
+      projectToDoForm.appendChild(toDoFormProjectDiv);
+      toDoFormProjectDiv.appendChild(toDoFormProjectLabel);
+      toDoFormProjectDiv.appendChild(toDoFormProjectInput);
+    }
     projectToDoForm.appendChild(toDoFormTitleDiv);
     toDoFormTitleDiv.appendChild(toDoFormTitleLabel);
     toDoFormTitleDiv.appendChild(toDoFormTitleInput);
@@ -99,11 +102,22 @@ const addProjectToDoForm = (function() {
     toDoFormPrioritySelect.appendChild(priorityLater);
     projectToDoForm.appendChild(toDoFormSaveBtn);
     projectToDoForm.appendChild(toDoFormCancelBtn);
-    
-    toDoFormSaveBtn.addEventListener('click', addProject);
+
+    // determines what listener to add based on which form is present
+    if (document.getElementById('toDoFormProjectDiv')) { // looks for projectTitle div
+      toDoFormSaveBtn.addEventListener('click', addProject);
+    } else {
+      toDoFormSaveBtn.addEventListener('click', addToDoItem);
+    }
+    //may need to change faddAllProjects function for individual project view
     toDoFormCancelBtn.addEventListener('click', addAllProjects);
-   };
-   
+  };
+  
+  const addToDoItem = function(e){
+    e.preventDefault();
+    console.log("working");
+  };
+
   return { addForm };
 })();
 

@@ -28,7 +28,7 @@ function Project(project, title, description, date, priority) {
 };
 
 const addProject = function(e){
-  e.preventDefault()
+  e.preventDefault();
   const project = document.getElementById('project').value;
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
@@ -69,6 +69,7 @@ const generateProjectCards = function(stuff){
   const projectTitleSidebar = document.createElement('h6');
   const toDoListHeader = document.createElement('h4')
   const toDoItem = document.createElement('h6');
+  const addToDoBtn = document.createElement('button');
 
   card.setAttribute('id', 'card');
   projectTitle.setAttribute('id', 'projectTitle');
@@ -79,6 +80,9 @@ const generateProjectCards = function(stuff){
   toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
+  addToDoBtn.setAttribute('id', 'addToDoBtn');
+  addToDoBtn.setAttribute('type', 'submit');
+  addToDoBtn.textContent = "+add todo item";
   projectTitleSidebar.textContent = `${stuff.project}`;
   projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
 
@@ -88,9 +92,9 @@ const generateProjectCards = function(stuff){
   card.append(cardToDoList);
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
+  cardToDoList.append(addToDoBtn);
   //sidebar
-  projectList.append(projectTitleSidebar); //must create element again
-  // make them all event listeners?
+  projectList.append(projectTitleSidebar); //make event listeners
 
   if (stuff.priority === "urgent") {
     toDoItem.style.backgroundColor = 'var(--urgent)';
@@ -99,9 +103,9 @@ const generateProjectCards = function(stuff){
   } else {
     toDoItem.style.backgroundColor = 'var(--later)';
   }
+
+  addToDoBtn.addEventListener('click', addProjectToDoForm.addForm);
 };
-
-
 
 
 
@@ -115,12 +119,8 @@ export {
   addAllProjects
 };
 
-
 // TO DO
-// 1. add cancel button to form
-// 2. add "add another todo item" button
-// 3. create form for adding another to do item
-// 4. make form update project
+// 4. make form update todo on specific project (not what originally designed for)
 
 // - factory function?
 // - add title on sidebar
