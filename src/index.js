@@ -52,7 +52,9 @@ const addProject = function(e){
 // -----loadApp File-----
 const addAllProjects = function(newProject){
   const projects = document.getElementById('projects');
+  const projectList = document.getElementById('projectList');
   projects.innerHTML = ""; //clears existing projects to avoid doubles
+  projectList.innerHTML = "";
   myProjects.forEach(element => generateProjectCards(element));
 };
 
@@ -108,13 +110,17 @@ const generateProjectCards = function(stuff){
 addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
 
 
-export default addProject;
+export {
+  addProject,
+  addAllProjects
+};
 
 
 // TO DO
-// 1. add "add another todo item" button
-// 2. create form for adding another to do item
-// 3. make form update project
+// 1. add cancel button to form
+// 2. add "add another todo item" button
+// 3. create form for adding another to do item
+// 4. make form update project
 
 // - factory function?
 // - add title on sidebar

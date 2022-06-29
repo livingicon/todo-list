@@ -1,4 +1,4 @@
-import addProject from "./index.js";
+import {addProject, addAllProjects} from "./index.js";
 
 const addProjectToDoForm = (function() {
 
@@ -69,7 +69,13 @@ const addProjectToDoForm = (function() {
     toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
     toDoFormSaveBtn.setAttribute('type', 'submit');
     toDoFormSaveBtn.textContent = "save";
-    // ADD TO DO CANCEL BUTTON
+    toDoFormSaveBtn.style.backgroundColor = "var(--later)"
+    // todo cancel button
+    const toDoFormCancelBtn = document.createElement('button');
+    toDoFormCancelBtn.setAttribute('id', 'toDoFormCancelBtn');
+    toDoFormCancelBtn.setAttribute('type', 'button');
+    toDoFormCancelBtn.textContent = 'cancel';
+    toDoFormCancelBtn.style.backgroundColor = "var(--urgent)"
 
     // append
     projects.appendChild(projectToDoForm);
@@ -92,10 +98,12 @@ const addProjectToDoForm = (function() {
     toDoFormPrioritySelect.appendChild(prioritySoon);
     toDoFormPrioritySelect.appendChild(priorityLater);
     projectToDoForm.appendChild(toDoFormSaveBtn);
+    projectToDoForm.appendChild(toDoFormCancelBtn);
     
     toDoFormSaveBtn.addEventListener('click', addProject);
+    toDoFormCancelBtn.addEventListener('click', addAllProjects);
    };
-
+   
   return { addForm };
 })();
 
