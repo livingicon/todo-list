@@ -64,6 +64,7 @@ const generateProjectCards = function(stuff){
   const cardProject = document.createElement('div');
   const cardToDoList = document.createElement('div');
   const projectTitle = document.createElement('h2');
+  const projectTitleSidebar = document.createElement('h6');
   const toDoListHeader = document.createElement('h4')
   const toDoItem = document.createElement('h6');
 
@@ -76,6 +77,8 @@ const generateProjectCards = function(stuff){
   toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
+  projectTitleSidebar.textContent = `${stuff.project}`;
+  projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
 
   projects.append(card);
   card.append(cardProject);
@@ -84,7 +87,7 @@ const generateProjectCards = function(stuff){
   cardToDoList.append(toDoListHeader);
   cardToDoList.append(toDoItem);
   //sidebar
-  projectList.append(projectTitle);
+  projectList.append(projectTitleSidebar); //must create element again
   // make them all event listeners?
 
   if (stuff.priority === "urgent") {
