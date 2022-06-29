@@ -73,7 +73,7 @@ const generateProjectCards = function(stuff){
   projectTitle.textContent = `Project: ${stuff.project}`;
   cardToDoList.setAttribute('id', 'cardToDoList')
   toDoListHeader.setAttribute('id', 'toDoListHeader');
-  toDoListHeader.textContent = `${stuff.project} To Do List`;
+  toDoListHeader.textContent = `${stuff.project} To Do List:`;
   toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   Goal Completion: ${stuff.date}`;
@@ -112,14 +112,20 @@ export default addProject;
 
 
 // TO DO
+// 1. add "add another todo item" button
+// 2. create form for adding another to do item
+// 3. make form update project
+
 // - factory function?
 // - add title on sidebar
 // - make sidebar title clickable
 // - add button below toDoItem to add another to do item
 // - add form cancel button
-// - editing todos
-// - marking todo item as complete
-// - deleting todo items
+// - editing todos and editing project title
+// - marking todo item as complete (mark line through)
+// - deleting projects and/or todo items
 // - expand and minimize?
 // - add priority key (sidebar)
 // - break into modules (loadPage, addProject, editProject, addToDoItem);
+// - add projects header (All Projects)
+// - change "All Projects" to "show all projects"
