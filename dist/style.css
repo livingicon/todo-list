@@ -56,6 +56,7 @@ body {
 
 /* PROJECT FORM */
 
+#projectForm,
 #toDoForm {
   background-color: var(--project-dark);
   margin: 0;
@@ -63,7 +64,7 @@ body {
 
 /* CARD */
 
-#card {
+.card {
   max-width: 300px;
   background-color: var(--project-light);
   margin: 20px;

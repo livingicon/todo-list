@@ -1,4 +1,4 @@
-import addProjectToDoForm from "./addProjectForm";
+import addForms from "./addProjectForm";
 
 
 
@@ -6,19 +6,19 @@ import addProjectToDoForm from "./addProjectForm";
 const addProjectBtn = document.getElementById('addProjectBtn');
 // -----loadApp File-----
 // LOCAL STORAGE
-let myProjects = [];
 window.onload = function() {
   myProjects = JSON.parse(localStorage.getItem('myProjects'));
   if (myProjects === null) {
     myProjects = [];
   }
   addAllProjects();
+  // console.log(myProjects);
 };
 
-
-
+let myProjects = []; //does this need to be here?
 
 // -----addProject File-----
+// convert constructor function to class?
 function Project(project, title, description, date, priority) {
   this.project = project;
   this.title = title;
@@ -45,7 +45,13 @@ const addProject = function(e){
   }
 };
 
-//must find that project, add to JSON, and add to DOM on it
+function ToDo(title, description, date, priority) {
+  this.title = title;
+  this.description = description;
+  this.date = date;
+  this.priority = priority;
+};
+
 const addToDoItem = function(e){
   e.preventDefault();
   const title = document.getElementById('title').value;
@@ -56,15 +62,23 @@ const addToDoItem = function(e){
     alert("All fields are required to add todo item.");
     return false;
   } else {
-    console.log(e.target.getAttribute('data-position')); //working
-    // let newProject = new Project(project, title, description, date, priority);
-    // myProjects.push(newProject);
+    // replaces existing todo item (because title.this, etc? Need new form.)
+    const targetObj = myProjects[`${e.target.getAttribute('data-position')}`];
+    let newToDo = new ToDo(title, description, date, priority);
+    const newObj = Object.assign(targetObj, newToDo);
+    console.log(targetObj);
+    addAllProjects();
+    // myProjects.push(newToDo); // push where?
+    // addNewTodo(newToDo); //change this to addNewTodo function? 
     // localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    // addAllProjects(newProject); 
+    // console.log(myProjects[`${location}`].date); //working
+    // let location = `${e.target.getAttribute('data-position')}`;
   }
 };
 
+// const addNewToDo = function(newToDo){
 
+// };
 
 // -----loadApp File-----
 const addAllProjects = function(newProject){
@@ -88,7 +102,8 @@ const generateProjectCards = function(stuff){
   const toDoItem = document.createElement('h6');
   const addToDoBtn = document.createElement('button');
 
-  card.setAttribute('id', 'card');
+  card.setAttribute('class', 'card');
+  card.setAttribute('id', `${myProjects.indexOf(stuff)}`); //works
   projectTitle.setAttribute('id', 'projectTitle');
   projectTitle.textContent = `Project: ${stuff.project}`;
   cardToDoList.setAttribute('id', 'cardToDoList')
@@ -122,14 +137,14 @@ const generateProjectCards = function(stuff){
     toDoItem.style.backgroundColor = 'var(--later)';
   }
 
-  addToDoBtn.addEventListener('click', addProjectToDoForm.addForm);
+  addToDoBtn.addEventListener('click', addForms.addProjectForm);
 };
 
 
 
 
 // -----loadApp File-----
-addProjectBtn.addEventListener('click', addProjectToDoForm.addForm);
+addProjectBtn.addEventListener('click', addForms.addProjectForm);
 
 
 export {

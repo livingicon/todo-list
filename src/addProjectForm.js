@@ -1,23 +1,8 @@
 import {addProject, addAllProjects, addToDoItem} from "./index.js";
 
-const addProjectToDoForm = (function() {
+const addForms = (function() {
 
-  const addForm = function(e) {
-    let position = e.target.getAttribute('data-position');
-    const projects = document.getElementById('projects');
-    projects.innerHTML = ""; // removes projects so only form is visible
-    const projectToDoForm = document.createElement('form');
-    projectToDoForm.setAttribute('id', 'toDoForm');
-    // project name
-    const toDoFormProjectDiv = document.createElement('div');
-    const toDoFormProjectLabel = document.createElement('label');
-    const toDoFormProjectInput = document.createElement('input');
-    toDoFormProjectDiv.setAttribute('id', 'toDoFormProjectDiv');
-    toDoFormProjectLabel.setAttribute('for', 'project');
-    toDoFormProjectLabel.textContent = "Project Name";
-    toDoFormProjectInput.setAttribute('type', 'text');
-    toDoFormProjectInput.setAttribute('id', 'project');
-    toDoFormProjectInput.setAttribute('placeholder', 'project name')
+  const addToDoForm = function(e) {
     // todo title
     const toDoFormTitleDiv = document.createElement('div');
     const toDoFormTitleLabel = document.createElement('label');
@@ -66,28 +51,8 @@ const addProjectToDoForm = (function() {
     priorityLater.setAttribute('id', 'priorityLater');
     priorityLater.textContent = "Later";
     priorityLater.style.backgroundColor = 'var(--later)';
-    // todo save button
-    const toDoFormSaveBtn = document.createElement('button');
-    toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
-    toDoFormSaveBtn.setAttribute('type', 'submit');
-    toDoFormSaveBtn.setAttribute('data-position', `${position}`);
-    //trying to add here
-    toDoFormSaveBtn.textContent = "save";
-    toDoFormSaveBtn.style.backgroundColor = "var(--later)"
-    // todo cancel button
-    const toDoFormCancelBtn = document.createElement('button');
-    toDoFormCancelBtn.setAttribute('id', 'toDoFormCancelBtn');
-    toDoFormCancelBtn.setAttribute('type', 'button');
-    toDoFormCancelBtn.textContent = 'cancel';
-    toDoFormCancelBtn.style.backgroundColor = "var(--urgent)"
 
     // append
-    projects.appendChild(projectToDoForm);
-    if (e.target.id === "addProjectBtn"){ //only adds for addProjectBtn
-      projectToDoForm.appendChild(toDoFormProjectDiv);
-      toDoFormProjectDiv.appendChild(toDoFormProjectLabel);
-      toDoFormProjectDiv.appendChild(toDoFormProjectInput);
-    }
     projectToDoForm.appendChild(toDoFormTitleDiv);
     toDoFormTitleDiv.appendChild(toDoFormTitleLabel);
     toDoFormTitleDiv.appendChild(toDoFormTitleInput);
@@ -105,18 +70,50 @@ const addProjectToDoForm = (function() {
     toDoFormPrioritySelect.appendChild(priorityLater);
     projectToDoForm.appendChild(toDoFormSaveBtn);
     projectToDoForm.appendChild(toDoFormCancelBtn);
-
-    // determines what listener to add based on which form is present
-    if (document.getElementById('toDoFormProjectDiv')) { // looks for projectTitle div
-      toDoFormSaveBtn.addEventListener('click', addProject);
-    } else {
-      toDoFormSaveBtn.addEventListener('click', addToDoItem);
-    }
-    //may need to change faddAllProjects function for individual project view
-    toDoFormCancelBtn.addEventListener('click', addAllProjects);
   };
 
-  return { addForm };
+  const addProjectForm = function(e) {
+    // let position = e.target.getAttribute('data-position');
+    const projects = document.getElementById('projects');
+    const projectForm = document.createElement('form');
+    const projectFormDiv = document.createElement('div');
+    const projectFormLabel = document.createElement('label');
+    const projectFormInput = document.createElement('input');
+    // attributes
+    projectForm.setAttribute('id', 'projectForm');
+    projectFormDiv.setAttribute('id', 'projectFormDiv');
+    projectFormLabel.setAttribute('for', 'project');
+    projectFormLabel.textContent = "Project Name";
+    projectFormInput.setAttribute('type', 'text');
+    projectFormInput.setAttribute('id', 'project');
+    projectFormInput.setAttribute('placeholder', 'project name')
+    // save button
+    const projectFormSaveBtn = document.createElement('button');
+    projectFormSaveBtn.setAttribute('id', 'projectFormSaveBtn');
+    projectFormSaveBtn.setAttribute('type', 'submit');
+    // toDoFormSaveBtn.setAttribute('data-position', `${position}`);
+    projectFormSaveBtn.textContent = "save";
+    projectFormSaveBtn.style.backgroundColor = "var(--later)"
+    // cancel button
+    const projectFormCancelBtn = document.createElement('button');
+    projectFormCancelBtn.setAttribute('id', 'projectCancelBtn');
+    projectFormCancelBtn.setAttribute('type', 'button');
+    projectFormCancelBtn.textContent = 'cancel';
+    projectFormCancelBtn.style.backgroundColor = "var(--urgent)"
+    // append
+    projects.innerHTML = ""; // removes projects so only form is visible
+    projects.appendChild(projectForm);
+    projectForm.appendChild(projectFormDiv)
+    projectFormDiv.appendChild(projectFormLabel);
+    projectFormDiv.appendChild(projectFormInput);
+    projectForm.appendChild(projectFormSaveBtn);
+    projectForm.appendChild(projectFormCancelBtn);
+
+    projectFormSaveBtn.addEventListener('click', addProject);
+    projectFormCancelBtn.addEventListener('click', addAllProjects);
+  };
+
+  return { addProjectForm, addToDoForm };
 })();
 
-export default addProjectToDoForm;
+export default addForms;
