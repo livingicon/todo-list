@@ -12,13 +12,12 @@ window.onload = function() {
     myProjects = [];
   }
   addAllProjects();
-  // console.log(myProjects);
 };
 
-let myProjects = []; //does this need to be here?
+let myProjects = [];
 
 // -----addProject File-----
-// convert constructor function to class?
+// convert constructor function to class or factory?
 function Project(project) {
   this.project = project;
   this.toDoArray = [];
@@ -38,7 +37,7 @@ const addProject = function(e){
   }
 };
 
-// function ToDo(title, description, date, priority) { //convert constructor function to class
+// function ToDo(title, description, date, priority) {
 //   this.title = title;
 //   this.description = description;
 //   this.date = date;
@@ -61,7 +60,6 @@ class ToDo {
 
 const addToDo = function(e){ // objects can't have duplicate keys
   e.preventDefault();
-  //change name below based on if one exists
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
   const date = document.getElementById('due-date').value;
@@ -70,34 +68,24 @@ const addToDo = function(e){ // objects can't have duplicate keys
     alert("All fields are required to add todo item.");
     return false;
   } else {
-    // let targetObj = myProjects[`${e.target.getAttribute('data-position')}`];
     let newToDo = new ToDo(title, description, date, priority);
-    myProjects[`${e.target.getAttribute('data-position')}`].toDoArray.push(newToDo);
+    myProjects[`${e.target.getAttribute('data-position')}`]
+    .toDoArray.push(newToDo);
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    addAllProjects(newToDo);
-    addAllToDos();
-    // console.log(myProjects);
+    addAllProjects(); //should it have newToDo parameter?
     }
   };
 
-const addAllToDos = function(){
-
-};
-
 // -----loadApp File-----
-//how can I make this add the todos as well?
-const addAllProjects = function(newProject, newToDo){
+const addAllProjects = function(newProject, newToDo){ // newToDo parameter?
   const projects = document.getElementById('projects');
   const projectList = document.getElementById('projectList');
   projects.innerHTML = ""; //clears existing projects to avoid doubles
   projectList.innerHTML = "";
   myProjects.forEach(element => generateProjectCards(element));
-  console.log(myProjects);
-  console.log(myProjects[0].toDoArray[0].date); // working
 };
 
-//how do I cycle through the ToDoArray
-const generateProjectCards = function(stuff){
+const generateProjectCards = function(element){
   const projectList = document.getElementById('projectList'); // sidebar list
   const projects = document.getElementById('projects'); // projects
   const card = document.createElement('div');
@@ -107,14 +95,14 @@ const generateProjectCards = function(stuff){
   const addToDoBtn = document.createElement('button');
   // attributes
   card.setAttribute('class', 'card');
-  card.setAttribute('id', `${myProjects.indexOf(stuff)}`); //works
+  card.setAttribute('id', `${myProjects.indexOf(element)}`); //works
   projectTitle.setAttribute('id', 'projectTitle');
-  projectTitle.textContent = `Project: ${stuff.project}`;
+  projectTitle.textContent = `Project: ${element.project}`;
   addToDoBtn.setAttribute('id', 'addToDoBtn');
   addToDoBtn.setAttribute('type', 'submit');
-  addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(stuff)}`); // added data-position here
+  addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(element)}`);
   addToDoBtn.textContent = "+add todo item";
-  projectTitleSidebar.textContent = `${stuff.project}`;
+  projectTitleSidebar.textContent = `${element.project}`;
   projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
   // append
   projects.append(card);
@@ -125,38 +113,44 @@ const generateProjectCards = function(stuff){
   projectList.append(projectTitleSidebar); //make event listeners?
   // event listeners
   addToDoBtn.addEventListener('click', addForms.addToDoForm);
+  // todos
+  myProjects[`${myProjects.indexOf(element)}`].toDoArray.forEach(toDo => 
+    addAllToDos(toDo));
 };
 
-  // const cardToDoList = document.createElement('div');
-  // const toDoListHeader = document.createElement('h4')
-  // const toDoItem = document.createElement('h6');
+const addAllToDos = function(check){
+  // console.log('log as many times as todos'); //working
+  // get it by data-position...
+  const card = document.getElementById(`${myProjects.indexOf(element)}`); //element not defined here
+  const cardToDoList = document.createElement('div');
+  const toDoListHeader = document.createElement('h4')
+  const toDoItem = document.createElement('h6');
 
-  // cardToDoList.setAttribute('id', 'cardToDoList')
-  // toDoListHeader.setAttribute('id', 'toDoListHeader');
+  cardToDoList.setAttribute('id', 'cardToDoList')
+  toDoListHeader.setAttribute('id', 'toDoListHeader');
+  toDoListHeader.textContent = "Poopy";
   // toDoListHeader.textContent = `${stuff.project} To Do List:`;
-  // toDoItem.setAttribute('id', 'toDoItem');
+  toDoItem.setAttribute('id', 'toDoItem');
   // toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
   // Goal Completion: ${stuff.date}`;
+  toDoItem.innerHTML = "poop";
 
-  // card.append(cardToDoList);
-  // cardToDoList.append(toDoListHeader);
-  // cardToDoList.append(toDoItem);
+  card.append(cardToDoList);
+  cardToDoList.append(toDoListHeader);
+  cardToDoList.append(toDoItem);
 
-  // if (stuff.priority === "urgent") {
-  //   toDoItem.style.backgroundColor = 'var(--urgent)';
-  // } else if (stuff.priority === "soon") {
-  //   toDoItem.style.backgroundColor = 'var(--soon)';
-  // } else {
-  //   toDoItem.style.backgroundColor = 'var(--later)';
-  // }
-
-
-
+  if (stuff.priority === "urgent") {
+    toDoItem.style.backgroundColor = 'var(--urgent)';
+  } else if (stuff.priority === "soon") {
+    toDoItem.style.backgroundColor = 'var(--soon)';
+  } else {
+    toDoItem.style.backgroundColor = 'var(--later)';
+  }
+};
 
 
 // -----loadApp File-----
 addProjectBtn.addEventListener('click', addForms.addProjectForm);
-
 
 export {
   addProject,
@@ -178,10 +172,3 @@ export {
 // - break into modules (loadPage, addProject, editProject, addToDoItem);
 // - add projects header (All Projects)
 // - change "All Projects" to "show all projects"
-
-// Make your project constructor output something like this:
-// projectA = {
-//   name:  "Project A",
-//   todoArray: [],
-// }
-// Then when you create a todo that belongs in projectA you can push it into its array like projectA.todoArray.push(newTodo)
