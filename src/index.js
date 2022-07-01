@@ -15,6 +15,7 @@ window.onload = function() {
 };
 
 let myProjects = [];
+let toDoArray = []; //will this help?
 
 // -----addProject File-----
 // convert constructor function to class or factory?
@@ -72,12 +73,12 @@ const addToDo = function(e){ // objects can't have duplicate keys
     myProjects[`${e.target.getAttribute('data-position')}`]
     .toDoArray.push(newToDo);
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    addAllProjects(); //should it have newToDo parameter?
+    addAllProjects(newToDo); //should it have newToDo parameter?
     }
   };
 
 // -----loadApp File-----
-const addAllProjects = function(newProject, newToDo){ // newToDo parameter?
+const addAllProjects = function(){ // newToDo parameter?
   const projects = document.getElementById('projects');
   const projectList = document.getElementById('projectList');
   projects.innerHTML = ""; //clears existing projects to avoid doubles
@@ -85,68 +86,71 @@ const addAllProjects = function(newProject, newToDo){ // newToDo parameter?
   myProjects.forEach(element => generateProjectCards(element));
 };
 
-const generateProjectCards = function(element){
+const generateProjectCards = function(stuff){
   const projectList = document.getElementById('projectList'); // sidebar list
   const projects = document.getElementById('projects'); // projects
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
   const projectTitle = document.createElement('h2');
   const projectTitleSidebar = document.createElement('h6');
+  const toDoListHeader = document.createElement('h4')
   const addToDoBtn = document.createElement('button');
   // attributes
   card.setAttribute('class', 'card');
-  card.setAttribute('id', `${myProjects.indexOf(element)}`); //works
+  card.setAttribute('id', `${myProjects.indexOf(stuff)}`); //works
   projectTitle.setAttribute('id', 'projectTitle');
-  projectTitle.textContent = `Project: ${element.project}`;
+  projectTitle.textContent = `Project: ${stuff.project}`;
+  toDoListHeader.setAttribute('id', 'toDoListHeader');
+  toDoListHeader.textContent = `${stuff.project} To Do List:`;
   addToDoBtn.setAttribute('id', 'addToDoBtn');
   addToDoBtn.setAttribute('type', 'submit');
-  addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(element)}`);
+  addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
   addToDoBtn.textContent = "+add todo item";
-  projectTitleSidebar.textContent = `${element.project}`;
+  projectTitleSidebar.textContent = `${stuff.project}`;
   projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
-  // append
+  // append 
   projects.append(card);
   card.append(cardProject);
   cardProject.append(projectTitle);
+  card.append(toDoListHeader);
+
+  // --append todos
+  let index = `${myProjects.indexOf(stuff)}`;
+  myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo => 
+    addAllToDos(toDo, index));
+
+
+  // --append addToDoBtn  
   card.append(addToDoBtn);
-  // append sidebar
-  projectList.append(projectTitleSidebar); //make event listeners?
   // event listeners
   addToDoBtn.addEventListener('click', addForms.addToDoForm);
-  // todos
-  myProjects[`${myProjects.indexOf(element)}`].toDoArray.forEach(toDo => 
-    addAllToDos(toDo));
+  // --append projects to sidebar
+  projectList.append(projectTitleSidebar); //make event listeners?
 };
 
-const addAllToDos = function(check){
-  // console.log('log as many times as todos'); //working
-  // get it by data-position...
-  const card = document.getElementById(`${myProjects.indexOf(element)}`); //element not defined here
+const addAllToDos = function(toDo, index){
+  const card = document.getElementById(index);
   const cardToDoList = document.createElement('div');
-  const toDoListHeader = document.createElement('h4')
   const toDoItem = document.createElement('h6');
 
   cardToDoList.setAttribute('id', 'cardToDoList')
-  toDoListHeader.setAttribute('id', 'toDoListHeader');
-  toDoListHeader.textContent = "Poopy";
-  // toDoListHeader.textContent = `${stuff.project} To Do List:`;
   toDoItem.setAttribute('id', 'toDoItem');
-  // toDoItem.innerHTML = `${stuff.title}: ${stuff.description}<br />
-  // Goal Completion: ${stuff.date}`;
-  toDoItem.innerHTML = "poop";
+  toDoItem.innerHTML = `${toDo.title}: ${toDo.description}<br />
+  Goal Completion: ${toDo.date}`;
 
-  card.append(cardToDoList);
-  cardToDoList.append(toDoListHeader);
+  card.appendChild(cardToDoList);
   cardToDoList.append(toDoItem);
 
-  if (stuff.priority === "urgent") {
+  if (toDo.priority === "urgent") {
     toDoItem.style.backgroundColor = 'var(--urgent)';
-  } else if (stuff.priority === "soon") {
+  } else if (toDo.priority === "soon") {
     toDoItem.style.backgroundColor = 'var(--soon)';
   } else {
     toDoItem.style.backgroundColor = 'var(--later)';
   }
 };
+
+
 
 
 // -----loadApp File-----
@@ -160,6 +164,7 @@ export {
 
 // TO DO
 // - factory function?
+// - if project already exist alert
 // - add title on sidebar
 // - make sidebar title clickable
 // - add button below toDoItem to add another to do item
