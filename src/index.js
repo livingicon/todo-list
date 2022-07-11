@@ -2,7 +2,6 @@ import addForms from "./addProjectForm";
 
 
 
-
 const addProjectBtn = document.getElementById('addProjectBtn');
 // -----loadApp File-----
 // LOCAL STORAGE
@@ -38,13 +37,6 @@ const addProject = function(e){
   }
 };
 
-// function ToDo(title, description, date, priority) {
-//   this.title = title;
-//   this.description = description;
-//   this.date = date;
-//   this.priority = priority;
-// };
-
 class ToDo {
   constructor(
     title = "unknown",
@@ -59,7 +51,7 @@ class ToDo {
   }
 };
 
-const addToDo = function(e){ // objects can't have duplicate keys
+const addToDo = function(e){
   e.preventDefault();
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
@@ -73,33 +65,39 @@ const addToDo = function(e){ // objects can't have duplicate keys
     myProjects[`${e.target.getAttribute('data-position')}`]
     .toDoArray.push(newToDo);
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    addAllProjects(newToDo); //should it have newToDo parameter?
+    addAllProjects();
     }
   };
 
 // -----loadApp File-----
-const addAllProjects = function(){ // newToDo parameter?
+const addAllProjects = function(){
   const projects = document.getElementById('projects');
   const projectList = document.getElementById('projectList');
-  projects.innerHTML = ""; //clears existing projects to avoid doubles
+  projects.innerHTML = ""; //clears existing projects
   projectList.innerHTML = "";
   myProjects.forEach(element => generateProjectCards(element));
 };
 
 const generateProjectCards = function(stuff){
-  const projectList = document.getElementById('projectList'); // sidebar list
-  const projects = document.getElementById('projects'); // projects
+  const projectList = document.getElementById('projectList');
+  const projects = document.getElementById('projects');
   const card = document.createElement('div');
   const cardProject = document.createElement('div');
   const projectTitle = document.createElement('h2');
+  const projectDeleteIcon = document.createElement('img');
   const projectTitleSidebar = document.createElement('h6');
   const toDoListHeader = document.createElement('h4')
   const addToDoBtn = document.createElement('button');
   // attributes
   card.setAttribute('class', 'card');
-  card.setAttribute('id', `${myProjects.indexOf(stuff)}`); //works
+  card.setAttribute('id', `${myProjects.indexOf(stuff)}`);
+  cardProject.setAttribute('id', 'titleDiv');
   projectTitle.setAttribute('id', 'projectTitle');
   projectTitle.textContent = `Project: ${stuff.project}`;
+  projectDeleteIcon.setAttribute('id', 'deletePrj');
+  projectDeleteIcon.setAttribute('src', './images/delete-alert.png');
+  projectDeleteIcon.setAttribute('alt', 'delete project icon');
+  projectDeleteIcon.setAttribute('title', 'delete project');
   toDoListHeader.setAttribute('id', 'toDoListHeader');
   toDoListHeader.textContent = `${stuff.project} To Do List:`;
   addToDoBtn.setAttribute('id', 'addToDoBtn');
@@ -112,17 +110,16 @@ const generateProjectCards = function(stuff){
   projects.append(card);
   card.append(cardProject);
   cardProject.append(projectTitle);
+  cardProject.append(projectDeleteIcon);
   card.append(toDoListHeader);
-
   // --append todos
   let index = `${myProjects.indexOf(stuff)}`;
   myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo => 
     addAllToDos(toDo, index));
-
-
   // --append addToDoBtn  
   card.append(addToDoBtn);
   // event listeners
+  projectDeleteIcon.addEventListener('dblclick', deleteProject)
   addToDoBtn.addEventListener('click', addForms.addToDoForm);
   // --append projects to sidebar
   projectList.append(projectTitleSidebar); //make event listeners?
@@ -150,6 +147,12 @@ const addAllToDos = function(toDo, index){
   }
 };
 
+const deleteProject = function(e) {
+  myProjects.splice(e.target.getAttribute("data-position"), 1);
+  localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
+  addAllProjects();
+};
+
 
 
 
@@ -163,17 +166,15 @@ export {
 };
 
 // TO DO
-// - factory function?
-// - if project already exist alert
-// - add title on sidebar
 // - make sidebar title clickable
-// - add button below toDoItem to add another to do item
-// - add form cancel button
-// - editing todos and editing project title
 // - marking todo item as complete (mark line through)
 // - deleting projects and/or todo items
-// - expand and minimize?
 // - add priority key (sidebar)
-// - break into modules (loadPage, addProject, editProject, addToDoItem);
 // - add projects header (All Projects)
-// - change "All Projects" to "show all projects"
+// - "show all projects" button (each minimized)
+// - break into modules (loadPage, addProject, editProject, addToDoItem);
+
+// - factory function??
+// - expand and minimize??
+// - if project already exists alert??
+// - editing todos and editing project title??

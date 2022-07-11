@@ -70,8 +70,21 @@ body {
   margin: 20px;
 }
 
-#projectTitle {
+#titleDiv {
   background-color: var(--project-dark);
+  display: flex;
+  justify-content: space-between;
+}
+
+#deletePrj {
+  height: 1rem;
+}
+
+#deletePrj:hover {
+  background-color: var(--urgent);
+}
+
+#projectTitle {
   margin: 0;
 }
 
