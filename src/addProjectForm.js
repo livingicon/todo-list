@@ -1,4 +1,4 @@
-import { loadProjectsModule, addProject, addToDo} from "./index";
+import { loadProjectsModule, addElements } from "./index";
 
 const addForms = (function() {
 
@@ -38,7 +38,7 @@ const addForms = (function() {
     projectForm.appendChild(projectFormSaveBtn);
     projectForm.appendChild(projectFormCancelBtn);
     // listen
-    projectFormSaveBtn.addEventListener('click', addProject);
+    projectFormSaveBtn.addEventListener('click', addElements.addProject);
     projectFormCancelBtn.addEventListener('click', loadProjectsModule.addAllProjects);
   };
 
@@ -134,7 +134,7 @@ const addForms = (function() {
     toDoFormDiv.appendChild(toDoFormSaveBtn);
     toDoFormDiv.appendChild(toDoFormCancelBtn);
     // listen
-    toDoFormSaveBtn.addEventListener('click', addToDo);
+    toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
     toDoFormCancelBtn.addEventListener('click', loadProjectsModule.addAllProjects);
   };
 
