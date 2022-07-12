@@ -1,7 +1,7 @@
 import addForms from "./addProjectForm";
-import { deleteElements } from "./ui";
+import { addElements, deleteElements } from "./ui";
 
-const addProjectBtn = document.getElementById('addProjectBtn');
+
 
 // LOCAL STORAGE
 window.onload = function() {
@@ -12,85 +12,13 @@ window.onload = function() {
   loadProjectsModule.addAllProjects();
 };
 
+const addProjectBtn = document.getElementById('addProjectBtn');
 let myProjects = [];
-let toDoArray = []; //do I need this?
-
-// convert constructor function to class or factory?
-function Project(project) {
-  this.project = project;
-  this.toDoArray = [];
-};
-
-class ToDo {
-  constructor(
-    title = "unknown",
-    description = "unknown",
-    date = 0,
-    priority = 0
-  ) {
-    this.title = title;
-    this.description = description;
-    this.date = date;
-    this.priority = priority;
-  }
-};
-
-const addElements = (function() {
-
-  const addProject = function(e){
-    e.preventDefault();
-    const project = document.getElementById('project').value;
-    if (!project) {
-      alert("Please enter a project name in the input.");
-      return false;
-    } else {
-      let newProject = new Project(project);
-      myProjects.push(newProject);
-      localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      loadProjectsModule.addAllProjects(newProject); 
-    }
-  };
-
-  const addToDo = function(e){
-    e.preventDefault();
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const date = document.getElementById('due-date').value;
-    const priority = document.getElementById('priority').value;
-    if (!title || !description || !date) {
-      alert("All fields are required to add todo item.");
-      return false;
-    } else {
-      let newToDo = new ToDo(title, description, date, priority);
-      myProjects[`${e.target.getAttribute('data-position')}`]
-      .toDoArray.push(newToDo);
-      localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      loadProjectsModule.addAllProjects();
-    }
-  };
-
-  return { addProject, addToDo };
-})();  
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+// let toDoArray = [];
 
 
 const loadProjectsModule = (function() {
-  
+  // ADD ALL PROJECTS
   const addAllProjects = function(){
     const projects = document.getElementById('projects');
     const projectList = document.getElementById('projectList');
@@ -98,7 +26,7 @@ const loadProjectsModule = (function() {
     projectList.innerHTML = "";
     myProjects.forEach(element => generateProjectCards(element));
   };
-
+  // GENERATE PROJECT CARDS
   const generateProjectCards = function(stuff){
     const projectList = document.getElementById('projectList');
     const projects = document.getElementById('projects');
@@ -119,6 +47,7 @@ const loadProjectsModule = (function() {
     projectDeleteIcon.setAttribute('src', './images/delete-alert.png');
     projectDeleteIcon.setAttribute('alt', 'delete project icon');
     projectDeleteIcon.setAttribute('title', 'delete project');
+    projectDeleteIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
     toDoListHeader.setAttribute('id', 'toDoListHeader');
     toDoListHeader.textContent = `${stuff.project} To Do List:`;
     addToDoBtn.setAttribute('id', 'addToDoBtn');
@@ -134,7 +63,7 @@ const loadProjectsModule = (function() {
     cardProject.append(projectDeleteIcon);
     card.append(toDoListHeader);
     // --append todos
-    let projIndex = `${myProjects.indexOf(stuff)}`;
+    let projIndex = `${myProjects.indexOf(stuff)}`;                           // HERE!!
     myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo => 
       addAllToDos(toDo, projIndex));
     // --append addToDoBtn  
@@ -143,9 +72,9 @@ const loadProjectsModule = (function() {
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
     // --append projects to sidebar
-    projectList.append(projectTitleSidebar); //make event listeners?
+    projectList.append(projectTitleSidebar);
   };
-
+  // ADD ALL TODOS
   const addAllToDos = function(toDo, projIndex){
     const card = document.getElementById(projIndex);
     const cardToDoList = document.createElement('div');
@@ -164,7 +93,7 @@ const loadProjectsModule = (function() {
     toDoDeleteIcon.setAttribute('src', './images/delete-alert.png');
     toDoDeleteIcon.setAttribute('alt', 'delete project icon');
     toDoDeleteIcon.setAttribute('title', 'delete todo item');
-    let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
+    let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;      // HERE!!!
     toDoDeleteIcon.setAttribute('data-position', `${projIndex}`)
     toDoDeleteIcon.setAttribute('data-todo', `${todoIndex}`);
     // append
@@ -185,21 +114,6 @@ const loadProjectsModule = (function() {
 
   return { addAllProjects, generateProjectCards, addAllToDos };
 })();  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
