@@ -1,5 +1,5 @@
 import addForms from "./addProjectForm";
-import { deleteProject, deleteToDo } from "./ui";
+import { deleteElements } from "./ui";
 
 const addProjectBtn = document.getElementById('addProjectBtn');
 
@@ -15,19 +15,6 @@ window.onload = function() {
 
 let myProjects = [];
 let toDoArray = []; //do I need this?
-
-// // export these to ui?
-// const deleteProject = function(e) {
-//   myProjects.splice(e.target.getAttribute("data-position"), 1);
-//   localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-//   loadProjectsModule.addAllProjects();
-// };
-
-// const deleteToDo = function(e, projIndex) {
-//   myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
-//   localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-//   loadProjectsModule.addAllProjects();
-// };
 
 // -----addProject File-----
 // convert constructor function to class or factory?
@@ -150,7 +137,7 @@ const loadProjectsModule = (function() {
     // --append addToDoBtn  
     card.append(addToDoBtn);
     // event listeners
-    projectDeleteIcon.addEventListener('dblclick', deleteProject);
+    projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
     // --append projects to sidebar
     projectList.append(projectTitleSidebar); //make event listeners?
@@ -190,7 +177,7 @@ const loadProjectsModule = (function() {
       toDoItem.style.backgroundColor = 'var(--later)';
     }
     // event listeners
-    toDoDeleteIcon.addEventListener('dblclick', deleteToDo);
+    toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 
   return { addAllProjects, generateProjectCards, addAllToDos };
