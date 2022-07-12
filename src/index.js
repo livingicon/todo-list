@@ -113,31 +113,44 @@ const generateProjectCards = function(stuff){
   cardProject.append(projectDeleteIcon);
   card.append(toDoListHeader);
   // --append todos
-  let index = `${myProjects.indexOf(stuff)}`;
+  let projIndex = `${myProjects.indexOf(stuff)}`;
   myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo => 
-    addAllToDos(toDo, index));
+    addAllToDos(toDo, projIndex));
   // --append addToDoBtn  
   card.append(addToDoBtn);
   // event listeners
-  projectDeleteIcon.addEventListener('dblclick', deleteProject)
+  projectDeleteIcon.addEventListener('dblclick', deleteProject);
   addToDoBtn.addEventListener('click', addForms.addToDoForm);
   // --append projects to sidebar
   projectList.append(projectTitleSidebar); //make event listeners?
 };
 
-const addAllToDos = function(toDo, index){
-  const card = document.getElementById(index);
+const addAllToDos = function(toDo, projIndex){
+  const card = document.getElementById(projIndex);
   const cardToDoList = document.createElement('div');
   const toDoItem = document.createElement('h6');
-
+  // const toDoCompleteIcon = document.createElement('img');
+  // const toDoEditIcon = document.createElement('img');
+  const toDoDeleteIcon = document.createElement('img');
+  //attributes
   cardToDoList.setAttribute('id', 'cardToDoList')
   toDoItem.setAttribute('id', 'toDoItem');
   toDoItem.innerHTML = `${toDo.title}: ${toDo.description}<br />
   Goal Completion: ${toDo.date}`;
-
+  // toDoCompleteIcon
+  // toDoEditIcon
+  toDoDeleteIcon.setAttribute('id', 'deleteToDo');
+  toDoDeleteIcon.setAttribute('src', './images/delete-alert.png');
+  toDoDeleteIcon.setAttribute('alt', 'delete project icon');
+  toDoDeleteIcon.setAttribute('title', 'delete todo item');
+  let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
+  toDoDeleteIcon.setAttribute('data-position', `${projIndex}`)
+  toDoDeleteIcon.setAttribute('data-todo', `${todoIndex}`);
+  // append
   card.appendChild(cardToDoList);
   cardToDoList.append(toDoItem);
-
+  toDoItem.append(toDoDeleteIcon);
+  // priority color
   if (toDo.priority === "urgent") {
     toDoItem.style.backgroundColor = 'var(--urgent)';
   } else if (toDo.priority === "soon") {
@@ -145,15 +158,22 @@ const addAllToDos = function(toDo, index){
   } else {
     toDoItem.style.backgroundColor = 'var(--later)';
   }
+  // event listeners
+  toDoDeleteIcon.addEventListener('dblclick', deleteToDo);
 };
 
+// export these to ui?
 const deleteProject = function(e) {
   myProjects.splice(e.target.getAttribute("data-position"), 1);
   localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
   addAllProjects();
 };
 
-
+const deleteToDo = function(e, projIndex) {
+  myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
+  localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
+  addAllProjects();
+};
 
 
 // -----loadApp File-----
@@ -168,7 +188,7 @@ export {
 // TO DO
 // - make sidebar title clickable
 // - marking todo item as complete (mark line through)
-// - deleting projects and/or todo items
+// - deleting todo items
 // - add priority key (sidebar)
 // - add projects header (All Projects)
 // - "show all projects" button (each minimized)
