@@ -1,16 +1,16 @@
-import { loadProjectsModule } from "./index";
-// import addForms from "./addProjectForm";
+// import { loadProjectsModule } from "./index";
+// import addForms from "./forms";
 
-
+// ADD MODULE
 const addElements = (function() {
-  // convert constructor functions to factory?
+
   // PROJECT CONSTRUCTOR
-  function Project(project) {
+  function Project(project) { //change
     this.project = project;
     this.toDoArray = [];
   };
 
-  // TODO CLASS
+  // TODO CLASS CONSTRUCTOR
   class ToDo {
     constructor(
       title = "unknown",
@@ -38,10 +38,10 @@ const addElements = (function() {
       let newProject = new Project(project);
       myProjects.push(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      // loadProjectsModule.addAllProjects(newProject); 
       window.onload();
     }
   };
+
   // ADD TODO ITEM
   const addToDo = function(e){
     let myProjects = [];
@@ -59,35 +59,35 @@ const addElements = (function() {
       myProjects[`${e.target.getAttribute('data-position')}`]
       .toDoArray.push(newToDo);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      // loadProjectsModule.addAllProjects();
       window.onload();
     }
   };
+
   return { addProject, addToDo };
 })(); 
 
 
 
-
+// DELETE MODULE
 const deleteElements = (function() {
+
   // DELETE PROJECT
   const deleteProject = function(e) {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    console.log(e.target.getAttribute("data-position")); // null (not working)
     myProjects.splice(e.target.getAttribute("data-position"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
     window.onload();
   };
   // DELETE TODO
-  const deleteToDo = function(e) { // this one seems to be accurate in delete
+  const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    console.log(e.target.getAttribute("data-todo"));
     myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
     window.onload();
   };
+
   return { deleteProject, deleteToDo };
 })();  
 

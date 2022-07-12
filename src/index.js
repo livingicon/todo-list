@@ -1,4 +1,4 @@
-import addForms from "./addProjectForm";
+import addForms from "./forms";
 import { addElements, deleteElements } from "./ui";
 
 
@@ -14,7 +14,7 @@ window.onload = function() {
 
 const addProjectBtn = document.getElementById('addProjectBtn');
 let myProjects = [];
-// let toDoArray = [];
+// let toDoArray = []; // needed?
 
 
 const loadProjectsModule = (function() {
