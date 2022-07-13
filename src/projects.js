@@ -58,7 +58,7 @@ const loadProjects = (function() {
     card.append(addToDoBtn);
     // event listeners
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
-    addToDoBtn.addEventListener('click', addForms.addToDoForm); // Here !!
+    addToDoBtn.addEventListener('click', addForms.addToDoForm);
     // --append projects to sidebar
     projectList.append(projectTitleSidebar);
   };
@@ -85,7 +85,7 @@ const loadProjects = (function() {
     toDoCompletedIcon.setAttribute('title', 'mark completed');
     let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
     toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)   // needed?
-    toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);          // HERE!!!
+    toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);
     toDoEditIcon.setAttribute('id', 'editToDo');
     toDoEditIcon.setAttribute('src', './images/pencil.png');
     toDoEditIcon.setAttribute('alt', 'edit project icon');
@@ -105,7 +105,7 @@ const loadProjects = (function() {
     toDoIcons.append(toDoCompletedIcon);
     toDoIcons.append(toDoEditIcon);
     toDoIcons.append(toDoDeleteIcon);
-    // priority color
+    // priority color (make this a separate function and add to this one?)
     if (toDo.priority === "urgent") {
       toDoItem.style.backgroundColor = 'var(--urgent)';
     } else if (toDo.priority === "soon") {
@@ -115,6 +115,7 @@ const loadProjects = (function() {
     } else {                                          
       toDoItem.style.backgroundColor = 'var(--project-light)' 
       toDoItem.style.setProperty('text-decoration', "line-through");
+      toDoItem.style.border = "2px solid var(--todo-light)";
       toDoCompletedIcon.remove();
     };
     // event listeners

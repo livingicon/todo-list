@@ -102,7 +102,11 @@ const editElements = (function() {
 
   // edit toDo item
   const editToDo = function(e) {
-    console.log("working");
+    addForms.addToDoForm(e);
+
+    // pseudocode
+    // 2. when form submitted, check for matches or changes
+    // 4. update changes, then update JSON then reload
   };
   
   // toDo completed

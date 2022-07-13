@@ -46,6 +46,8 @@ const addForms = (function() {
 
   // ADD TODO FORM FUNCTION
   const addToDoForm = function(e) {
+    let myProjects = [];
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
     // --todo form
     const projects = document.getElementById('projects');
     const toDoForm = document.createElement('form');
@@ -59,7 +61,13 @@ const addForms = (function() {
     toDoFormTitleLabel.textContent = "To Do Item Title";
     toDoFormTitleInput.setAttribute('type', 'text');
     toDoFormTitleInput.setAttribute('id', 'title');
-    toDoFormTitleInput.setAttribute('placeholder', 'title')
+    if (e.target.id === "editToDo") {
+      toDoFormTitleInput.setAttribute
+      ('placeholder', `${myProjects[e.target.getAttribute("data-position")]
+      .toDoArray[e.target.getAttribute("data-todo")].title}`);
+    } else {
+      toDoFormTitleInput.setAttribute('placeholder', 'title');
+    };
     // --todo description
     const toDoFormDescriptionDiv = document.createElement('div');
     const toDoFormDescriptionLabel = document.createElement('label');
@@ -68,7 +76,13 @@ const addForms = (function() {
     toDoFormDescriptionLabel.textContent = "To Do Item Description";
     toDoFormDescriptionInput.setAttribute('type', 'text');
     toDoFormDescriptionInput.setAttribute('id', 'description');
-    toDoFormDescriptionInput.setAttribute('placeholder', 'description')
+    if (e.target.id === "editToDo") {
+      toDoFormDescriptionInput.setAttribute
+      ('placeholder', `${myProjects[e.target.getAttribute("data-position")]
+      .toDoArray[e.target.getAttribute("data-todo")].description}`);
+    } else {
+      toDoFormDescriptionInput.setAttribute('placeholder', 'description'); 
+    };
     // --todo due-date
     const toDoFormDueDateDiv = document.createElement('div');
     const toDoFormDueDateLabel = document.createElement('label');
@@ -77,6 +91,11 @@ const addForms = (function() {
     toDoFormDueDateLabel.textContent = "To Do Item Due Date";
     toDoFormDueDateInput.setAttribute('type', 'date');
     toDoFormDueDateInput.setAttribute('id', 'due-date');
+    if (e.target.id === "editToDo") {
+      toDoFormDueDateInput.setAttribute
+      ('value', `${myProjects[e.target.getAttribute("data-position")]
+      .toDoArray[e.target.getAttribute("data-todo")].date}`);
+    } 
     // --todo priority
     const toDoFormPriorityDiv = document.createElement('div');
     const toDoFormPriorityLabel = document.createElement('label');
@@ -84,6 +103,7 @@ const addForms = (function() {
     const priorityNow = document.createElement('option');
     const prioritySoon = document.createElement('option');
     const priorityLater = document.createElement('option');
+    const priorityCompleted = document.createElement('option');
     toDoFormPriorityLabel.setAttribute('for', 'priority')
     toDoFormPriorityLabel.textContent = "To Do Item Priority";
     toDoFormPrioritySelect.setAttribute('id', 'priority');
@@ -99,6 +119,26 @@ const addForms = (function() {
     priorityLater.setAttribute('id', 'priorityLater');
     priorityLater.textContent = "Later";
     priorityLater.style.backgroundColor = 'var(--later)';
+    priorityCompleted.setAttribute('value', 'completed');
+    priorityCompleted.setAttribute('id', 'priorityCompleted');
+    priorityCompleted.textContent = "Completed";
+    priorityCompleted.style.backgroundColor = 'var(--project-light)';
+    // selected default on edit
+    if (e.target.id === "editToDo" && myProjects[e.target
+      .getAttribute("data-position")].toDoArray[e.target
+      .getAttribute("data-todo")].priority === "urgent") {
+      priorityNow.setAttribute('selected', 'selected');
+    } else if (e.target.id === "editToDo" && myProjects[e.target
+      .getAttribute("data-position")].toDoArray[e.target
+      .getAttribute("data-todo")].priority === "soon") {
+      prioritySoon.setAttribute('selected', 'selected');
+    } else if (e.target.id === "editToDo" && myProjects[e.target
+      .getAttribute("data-position")].toDoArray[e.target
+      .getAttribute("data-todo")].priority === "later") {
+      priorityLater.setAttribute('selected', 'selected');
+    } else {
+      priorityCompleted.setAttribute('selected', 'selected');
+    };
     // --todo save button
     const toDoFormSaveBtn = document.createElement('button');
     toDoFormSaveBtn.setAttribute('id', 'toDoFormSaveBtn');
@@ -132,12 +172,15 @@ const addForms = (function() {
     toDoFormPrioritySelect.appendChild(priorityNow);
     toDoFormPrioritySelect.appendChild(prioritySoon);
     toDoFormPrioritySelect.appendChild(priorityLater);
+    toDoFormPrioritySelect.appendChild(priorityCompleted);
     toDoFormDiv.appendChild(toDoFormSaveBtn);
     toDoFormDiv.appendChild(toDoFormCancelBtn);
     // listen
     toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
   };
+
+
 
   return { addProjectForm, addToDoForm };
 })();
