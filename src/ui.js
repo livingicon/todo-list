@@ -85,7 +85,8 @@ const deleteElements = (function() {
   const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
+    myProjects[e.target.getAttribute("data-position")]
+    .toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
     location.reload();
   };
@@ -99,6 +100,11 @@ const deleteElements = (function() {
 // EDIT MODULE
 const editElements = (function() {
 
+  // edit toDo item
+  const editToDo = function(e) {
+    console.log("working");
+  };
+  
   // toDo completed
   const toDoCompleted = function(e) {
     let myProjects = [];
@@ -106,10 +112,11 @@ const editElements = (function() {
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
+    // styling changes in addAllToDos function (should I change for dependency?)
     location.reload();
   };
 
-  return { toDoCompleted };
+  return { editToDo, toDoCompleted };
 })(); 
 
 

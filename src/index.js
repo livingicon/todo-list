@@ -19,9 +19,8 @@ addProjectBtn.addEventListener('click', addForms.addProjectForm);
 
 
 // TO DO (Today?)
-// 1. marking todo item as complete (mark line through)
-// 2. show all projects button (minimized by default)
-// 3. edit todo
+// 2. edit todo
+// 3. show all projects button (minimized by default)
 
 // - make sidebar title clickable
 // - add priority key (sidebar)

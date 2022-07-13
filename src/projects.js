@@ -70,7 +70,7 @@ const loadProjects = (function() {
     const toDoItem = document.createElement('h6');
     const toDoIcons = document.createElement('div');
     const toDoCompletedIcon = document.createElement('img');
-        // const toDoEditIcon = document.createElement('img');
+    const toDoEditIcon = document.createElement('img');
     const toDoDeleteIcon = document.createElement('img');
     //attributes
     cardToDoList.setAttribute('id', 'cardToDoList')
@@ -86,7 +86,12 @@ const loadProjects = (function() {
     let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
     toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)   // needed?
     toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);          // HERE!!!
-    // toDoEditIcon
+    toDoEditIcon.setAttribute('id', 'editToDo');
+    toDoEditIcon.setAttribute('src', './images/pencil.png');
+    toDoEditIcon.setAttribute('alt', 'edit project icon');
+    toDoEditIcon.setAttribute('title', 'edit todo item');
+    toDoEditIcon.setAttribute('data-position', `${projIndex}`)
+    toDoEditIcon.setAttribute('data-todo', `${todoIndex}`);
     toDoDeleteIcon.setAttribute('id', 'deleteToDo');
     toDoDeleteIcon.setAttribute('src', './images/delete-alert.png');
     toDoDeleteIcon.setAttribute('alt', 'delete project icon');
@@ -98,6 +103,7 @@ const loadProjects = (function() {
     cardToDoList.append(toDoItem);
     toDoItem.append(toDoIcons)
     toDoIcons.append(toDoCompletedIcon);
+    toDoIcons.append(toDoEditIcon);
     toDoIcons.append(toDoDeleteIcon);
     // priority color
     if (toDo.priority === "urgent") {
@@ -107,10 +113,13 @@ const loadProjects = (function() {
     } else if (toDo.priority === "later") {
       toDoItem.style.backgroundColor = 'var(--later)';
     } else {                                          
-      toDoItem.style.backgroundColor = 'var(--project-light)' // completed
+      toDoItem.style.backgroundColor = 'var(--project-light)' 
+      toDoItem.style.setProperty('text-decoration', "line-through");
+      toDoCompletedIcon.remove();
     };
     // event listeners
     toDoCompletedIcon.addEventListener('dblclick', editElements.toDoCompleted);
+    toDoEditIcon.addEventListener('dblclick', editElements.editToDo);
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 
