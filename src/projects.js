@@ -1,4 +1,4 @@
-import { addElements, deleteElements } from "./ui";
+import { addElements, deleteElements, toDoCompleted } from "./ui";
 import addForms from "./forms";
 
 const loadProjects = (function() {
@@ -68,27 +68,37 @@ const loadProjects = (function() {
     const card = document.getElementById(projIndex);
     const cardToDoList = document.createElement('div');
     const toDoItem = document.createElement('h6');
-    // const toDoCompleteIcon = document.createElement('img');
-    // const toDoEditIcon = document.createElement('img');
+    const toDoIcons = document.createElement('div');
+    const toDoCompletedIcon = document.createElement('img');
+        // const toDoEditIcon = document.createElement('img');
     const toDoDeleteIcon = document.createElement('img');
     //attributes
     cardToDoList.setAttribute('id', 'cardToDoList')
     toDoItem.setAttribute('id', 'toDoItem');
     toDoItem.innerHTML = `${toDo.title}: ${toDo.description}<br />
     Goal Completion: ${toDo.date}`;
-    // toDoCompleteIcon
+    // toDoIcons.setAttribute('id', 'toDoIcons');
+
+    toDoCompletedIcon.setAttribute('id', 'completedToDo');
+    toDoCompletedIcon.setAttribute('src', './images/check-bold.png');
+    toDoCompletedIcon.setAttribute('alt', 'mark as completed icon');
+    toDoCompletedIcon.setAttribute('title', 'mark completed');
+    let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
+    toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)
+    toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);
     // toDoEditIcon
     toDoDeleteIcon.setAttribute('id', 'deleteToDo');
     toDoDeleteIcon.setAttribute('src', './images/delete-alert.png');
     toDoDeleteIcon.setAttribute('alt', 'delete project icon');
     toDoDeleteIcon.setAttribute('title', 'delete todo item');
-    let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
     toDoDeleteIcon.setAttribute('data-position', `${projIndex}`)
     toDoDeleteIcon.setAttribute('data-todo', `${todoIndex}`);
     // append
     card.appendChild(cardToDoList);
     cardToDoList.append(toDoItem);
-    toDoItem.append(toDoDeleteIcon);
+    toDoItem.append(toDoIcons)
+    toDoIcons.append(toDoCompletedIcon);
+    toDoIcons.append(toDoDeleteIcon);
     // priority color
     if (toDo.priority === "urgent") {
       toDoItem.style.backgroundColor = 'var(--urgent)';
@@ -98,6 +108,7 @@ const loadProjects = (function() {
       toDoItem.style.backgroundColor = 'var(--later)';
     }
     // event listeners
+    toDoCompletedIcon.addEventListener('dblclick', toDoCompleted);
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 

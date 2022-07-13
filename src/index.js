@@ -19,11 +19,13 @@ addProjectBtn.addEventListener('click', addForms.addProjectForm);
 
 
 // TO DO
+// 1. marking todo item as complete (mark line through)
+// 2. show all projects button (minimized by default)
+// 3. edit todo
+
 // - make sidebar title clickable
-// - marking todo item as complete (mark line through)
 // - add priority key (sidebar)
 // - add projects header (All Projects)
-// - "show all projects" button (each minimized)
 
 // - factory function??
 // - expand and minimize??

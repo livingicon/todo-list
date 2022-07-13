@@ -1,16 +1,18 @@
 import loadProjects from "./projects";
 import addForms from "./forms";
 
+
+
+
 // ADD MODULE
 const addElements = (function() {
-
-  // PROJECT CONSTRUCTOR
+  // CONSTRUCTORS
+  // project
   function Project(project) { //change
     this.project = project;
     this.toDoArray = [];
   };
-
-  // TODO CLASS CONSTRUCTOR
+  // todo
   class ToDo {
     constructor(
       title = "unknown",
@@ -73,8 +75,7 @@ const addElements = (function() {
 
 // DELETE MODULE
 const deleteElements = (function() {
-
-  // DELETE PROJECT
+  // delete project
   const deleteProject = function(e) {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
@@ -83,8 +84,7 @@ const deleteElements = (function() {
     console.log('delete project');
     location.reload();
   };
-  
-  // DELETE TODO
+  // delete todo
   const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
@@ -98,7 +98,17 @@ const deleteElements = (function() {
 })();  
 
 
+
+
+// TODO COMPLETE
+const toDoCompleted = function(e) {
+  console.log("working");
+};
+
+
+
 export { 
   addElements, 
-  deleteElements 
+  deleteElements,
+  toDoCompleted
 };
