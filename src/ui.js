@@ -1,5 +1,5 @@
-// import { loadProjectsModule } from "./index";
-// import addForms from "./forms";
+import loadProjects from "./projects";
+import addForms from "./forms";
 
 // ADD MODULE
 const addElements = (function() {
@@ -38,7 +38,9 @@ const addElements = (function() {
       let newProject = new Project(project);
       myProjects.push(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      window.onload();
+      console.log('add project'); 
+      location.reload();
+
     }
   };
 
@@ -59,7 +61,8 @@ const addElements = (function() {
       myProjects[`${e.target.getAttribute('data-position')}`]
       .toDoArray.push(newToDo);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      window.onload();
+      console.log('add todo item');
+      location.reload();
     }
   };
 
@@ -76,16 +79,19 @@ const deleteElements = (function() {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
     myProjects.splice(e.target.getAttribute("data-position"), 1);
-    localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    window.onload();
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
+    console.log('delete project');
+    location.reload();
   };
+  
   // DELETE TODO
   const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
     myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    window.onload();
+    console.log('delete todo item');
+    location.reload();
   };
 
   return { deleteProject, deleteToDo };
