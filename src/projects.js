@@ -1,4 +1,4 @@
-import { addElements, deleteElements, toDoCompleted } from "./ui";
+import { addElements, deleteElements, editElements } from "./ui";
 import addForms from "./forms";
 
 const loadProjects = (function() {
@@ -84,8 +84,8 @@ const loadProjects = (function() {
     toDoCompletedIcon.setAttribute('alt', 'mark as completed icon');
     toDoCompletedIcon.setAttribute('title', 'mark completed');
     let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
-    toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)
-    toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);
+    toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)   // needed?
+    toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);          // HERE!!!
     // toDoEditIcon
     toDoDeleteIcon.setAttribute('id', 'deleteToDo');
     toDoDeleteIcon.setAttribute('src', './images/delete-alert.png');
@@ -104,11 +104,13 @@ const loadProjects = (function() {
       toDoItem.style.backgroundColor = 'var(--urgent)';
     } else if (toDo.priority === "soon") {
       toDoItem.style.backgroundColor = 'var(--soon)';
-    } else {
+    } else if (toDo.priority === "later") {
       toDoItem.style.backgroundColor = 'var(--later)';
-    }
+    } else {                                          
+      toDoItem.style.backgroundColor = 'var(--project-light)' // completed
+    };
     // event listeners
-    toDoCompletedIcon.addEventListener('dblclick', toDoCompleted);
+    toDoCompletedIcon.addEventListener('dblclick', editElements.toDoCompleted);
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 

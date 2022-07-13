@@ -40,7 +40,6 @@ const addElements = (function() {
       let newProject = new Project(project);
       myProjects.push(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      console.log('add project'); 
       location.reload();
 
     }
@@ -63,7 +62,6 @@ const addElements = (function() {
       myProjects[`${e.target.getAttribute('data-position')}`]
       .toDoArray.push(newToDo);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      console.log('add todo item');
       location.reload();
     }
   };
@@ -81,7 +79,6 @@ const deleteElements = (function() {
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
     myProjects.splice(e.target.getAttribute("data-position"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    console.log('delete project');
     location.reload();
   };
   // delete todo
@@ -90,7 +87,6 @@ const deleteElements = (function() {
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
     myProjects[e.target.getAttribute("data-position")].toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    console.log('delete todo item');
     location.reload();
   };
 
@@ -100,15 +96,26 @@ const deleteElements = (function() {
 
 
 
-// TODO COMPLETE
-const toDoCompleted = function(e) {
-  console.log("working");
-};
+// EDIT MODULE
+const editElements = (function() {
+
+  // toDo completed
+  const toDoCompleted = function(e) {
+    let myProjects = [];
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    myProjects[e.target.getAttribute("data-position")]
+    .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
+    localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
+    location.reload();
+  };
+
+  return { toDoCompleted };
+})(); 
 
 
 
 export { 
   addElements, 
   deleteElements,
-  toDoCompleted
+  editElements
 };
