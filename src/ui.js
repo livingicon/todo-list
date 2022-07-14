@@ -59,39 +59,20 @@ const addElements = (function() {
       return false;
     } else {
       let newToDo = new ToDo(title, description, date, priority);
-
-      myProjects[`${e.target.getAttribute('data-position')}`]
-      .toDoArray.push(newToDo);                               // HERE!!!
-
+      console.log(e.target.getAttribute('data-todo')); // null for new (number for not)
+      if (e.target.getAttribute('data-todo') === null) {
+        myProjects[`${e.target.getAttribute('data-position')}`]
+        .toDoArray.push(newToDo); 
+      } else {
+        myProjects[e.target.getAttribute("data-position")]
+        .toDoArray.splice(e.target.getAttribute("data-todo"), 1, newToDo);
+      }
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
       location.reload();
     }
   };
 
-    // add edited toDo item
-    const editToDo = function(e) {
-      console.log(e.target.getAttribute("data-position"));
-      console.log(e.target.getAttribute('data-todo'));
-
-      let myProjects = [];
-      myProjects = JSON.parse(localStorage.getItem('myProjects'));
-
-      e.preventDefault();
-      const title = document.getElementById('title').value;
-      const description = document.getElementById('description').value;
-      const date = document.getElementById('due-date').value;
-      const priority = document.getElementById('priority').value;
-
-      let newToDo = new ToDo(title, description, date, priority);
-
-      myProjects[e.target.getAttribute("data-position")]
-      .toDoArray.splice(e.target.getAttribute("data-todo"), 1, newToDo);
-
-      localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-      location.reload();
-    };
-
-  return { addProject, addToDo, editToDo };
+  return { addProject, addToDo };
 })(); 
 
 

@@ -186,11 +186,12 @@ const addForms = (function() {
     toDoFormDiv.appendChild(toDoFormCancelBtn);
     // listen
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
-    if (e.target.id === "editToDo") {
-      toDoFormSaveBtn.addEventListener('click', addElements.editToDo);
-    } else {
-      toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
-    }
+    toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
+    // if (e.target.id === "editToDo") {
+    //   toDoFormSaveBtn.addEventListener('click', addElements.editToDo);
+    // } else {
+    //   toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
+    // }
   };
 
 
