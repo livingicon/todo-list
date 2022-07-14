@@ -21,6 +21,8 @@ const loadProjects = (function() {
     const card = document.createElement('div');
     const cardProject = document.createElement('div');
     const projectTitle = document.createElement('h2');
+    const projectTitleIcons = document.createElement('div');
+    const expandIcon = document.createElement('img');
     const projectDeleteIcon = document.createElement('img');
     const projectTitleSidebar = document.createElement('h6');
     const toDoListHeader = document.createElement('h4')
@@ -31,6 +33,14 @@ const loadProjects = (function() {
     cardProject.setAttribute('id', 'titleDiv');
     projectTitle.setAttribute('id', 'projectTitle');
     projectTitle.textContent = `Project: ${stuff.project}`;
+    projectTitleIcons.setAttribute('id', 'projectTitleIcons');
+
+    expandIcon.setAttribute('id', 'expand');
+    expandIcon.setAttribute('src', './images/format-list-bulleted-square.png');
+    expandIcon.setAttribute('alt', 'expand project');
+    expandIcon.setAttribute('title', 'expand to see todo list');
+    expandIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
+
     projectDeleteIcon.setAttribute('id', 'deletePrj');
     projectDeleteIcon.setAttribute('src', './images/delete-alert.png');
     projectDeleteIcon.setAttribute('alt', 'delete project icon');
@@ -48,7 +58,9 @@ const loadProjects = (function() {
     projects.append(card);
     card.append(cardProject);
     cardProject.append(projectTitle);
-    cardProject.append(projectDeleteIcon);
+    cardProject.append(projectTitleIcons);
+    projectTitleIcons.append(expandIcon);
+    projectTitleIcons.append(projectDeleteIcon);
     card.append(toDoListHeader);
     // --append todos
     let projIndex = `${myProjects.indexOf(stuff)}`;
