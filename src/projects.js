@@ -120,7 +120,7 @@ const loadProjects = (function() {
     };
     // event listeners
     toDoCompletedIcon.addEventListener('dblclick', editElements.toDoCompleted);
-    toDoEditIcon.addEventListener('dblclick', editElements.editToDo);
+    toDoEditIcon.addEventListener('dblclick', addForms.addToDoForm);
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 

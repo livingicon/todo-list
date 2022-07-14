@@ -63,7 +63,7 @@ const addForms = (function() {
     toDoFormTitleInput.setAttribute('id', 'title');
     if (e.target.id === "editToDo") {
       toDoFormTitleInput.setAttribute
-      ('placeholder', `${myProjects[e.target.getAttribute("data-position")]
+      ('value', `${myProjects[e.target.getAttribute("data-position")]
       .toDoArray[e.target.getAttribute("data-todo")].title}`);
     } else {
       toDoFormTitleInput.setAttribute('placeholder', 'title');
@@ -78,7 +78,7 @@ const addForms = (function() {
     toDoFormDescriptionInput.setAttribute('id', 'description');
     if (e.target.id === "editToDo") {
       toDoFormDescriptionInput.setAttribute
-      ('placeholder', `${myProjects[e.target.getAttribute("data-position")]
+      ('value', `${myProjects[e.target.getAttribute("data-position")]
       .toDoArray[e.target.getAttribute("data-todo")].description}`);
     } else {
       toDoFormDescriptionInput.setAttribute('placeholder', 'description'); 
