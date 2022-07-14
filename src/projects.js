@@ -1,4 +1,4 @@
-import { addElements, deleteElements, editElements } from "./ui";
+import { addElements, deleteElements, editElements, interfaceElements } from "./ui";
 import addForms from "./forms";
 
 const loadProjects = (function() {
@@ -34,13 +34,11 @@ const loadProjects = (function() {
     projectTitle.setAttribute('id', 'projectTitle');
     projectTitle.textContent = `Project: ${stuff.project}`;
     projectTitleIcons.setAttribute('id', 'projectTitleIcons');
-
     expandIcon.setAttribute('id', 'expand');
     expandIcon.setAttribute('src', './images/format-list-bulleted-square.png');
     expandIcon.setAttribute('alt', 'expand project');
     expandIcon.setAttribute('title', 'expand to see todo list');
     expandIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
-
     projectDeleteIcon.setAttribute('id', 'deletePrj');
     projectDeleteIcon.setAttribute('src', './images/delete-alert.png');
     projectDeleteIcon.setAttribute('alt', 'delete project icon');
@@ -71,6 +69,7 @@ const loadProjects = (function() {
     // event listeners
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
+    expandIcon.addEventListener('click', interfaceElements.expand)
     // --append projects to sidebar
     projectList.append(projectTitleSidebar);
   };

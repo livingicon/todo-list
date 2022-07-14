@@ -4,7 +4,7 @@ import addForms from "./forms";
 
 
 
-// ADD MODULE
+// ADD ELEMENTS MODULE
 const addElements = (function() {
   // CONSTRUCTORS
   // project
@@ -77,7 +77,7 @@ const addElements = (function() {
 
 
 
-// DELETE MODULE
+// DELETE ELEMENTS MODULE
 const deleteElements = (function() {
   // delete project
   const deleteProject = function(e) {
@@ -122,8 +122,23 @@ const editElements = (function() {
 
 
 
+
+// EXPAND AND MINIMIZE MODULE
+const interfaceElements = (function(e) {
+
+  // expand
+  const expand = function() {
+    console.log('working');
+  }
+
+  return { expand };
+})(); 
+
+
+
 export { 
   addElements, 
   deleteElements,
-  editElements
+  editElements,
+  interfaceElements
 };
