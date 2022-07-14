@@ -59,14 +59,39 @@ const addElements = (function() {
       return false;
     } else {
       let newToDo = new ToDo(title, description, date, priority);
+
       myProjects[`${e.target.getAttribute('data-position')}`]
-      .toDoArray.push(newToDo);
+      .toDoArray.push(newToDo);                               // HERE!!!
+
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
       location.reload();
     }
   };
 
-  return { addProject, addToDo };
+    // add edited toDo item
+    const editToDo = function(e) {
+      console.log(e.target.getAttribute("data-position"));
+      console.log(e.target.getAttribute('data-todo'));
+
+      let myProjects = [];
+      myProjects = JSON.parse(localStorage.getItem('myProjects'));
+
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const date = document.getElementById('due-date').value;
+      const priority = document.getElementById('priority').value;
+
+      let newToDo = new ToDo(title, description, date, priority);
+
+      myProjects[e.target.getAttribute("data-position")]
+      .toDoArray.splice(e.target.getAttribute("data-todo"), 1, newToDo);
+
+      localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
+      location.reload();
+    };
+
+  return { addProject, addToDo, editToDo };
 })(); 
 
 
@@ -99,13 +124,6 @@ const deleteElements = (function() {
 
 // EDIT MODULE
 const editElements = (function() {
-
-  // edit toDo item
-  const editToDo = function(e) {
-    deleteElements.deleteToDo(e);
-    addElements.addToDo(e);
-    //working, but pushes to the bottom
-  };
   
   // toDo completed
   const toDoCompleted = function(e) {
@@ -118,7 +136,7 @@ const editElements = (function() {
     location.reload();
   };
 
-  return { editToDo, toDoCompleted };
+  return { toDoCompleted };
 })(); 
 
 

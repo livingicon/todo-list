@@ -136,8 +136,12 @@ const addForms = (function() {
       .getAttribute("data-position")].toDoArray[e.target
       .getAttribute("data-todo")].priority === "later") {
       priorityLater.setAttribute('selected', 'selected');
-    } else {
+    } else if (e.target.id === "editToDo" && myProjects[e.target
+      .getAttribute("data-position")].toDoArray[e.target
+      .getAttribute("data-todo")].priority === "completed") {
       priorityCompleted.setAttribute('selected', 'selected');
+    } else {
+      priorityNow.setAttribute('selected', 'selected');
     };
     // --todo save button
     const toDoFormSaveBtn = document.createElement('button');
@@ -145,8 +149,13 @@ const addForms = (function() {
     toDoFormSaveBtn.setAttribute('type', 'submit');
     toDoFormSaveBtn.textContent = "save";
     toDoFormSaveBtn.style.backgroundColor = "var(--later)"
-    let position = e.target.getAttribute('data-position');
+
+    let position = e.target.getAttribute('data-position'); // Here data position is changed for edit?
     toDoFormSaveBtn.setAttribute('data-position', `${position}`);
+    if (e.target.id === "editToDo") {
+      toDoFormSaveBtn.setAttribute('data-todo', `${e.target.getAttribute("data-todo")}`);
+    }
+
     // --todo cancel button
     const toDoFormCancelBtn = document.createElement('button');
     toDoFormCancelBtn.setAttribute('id', 'toDoCancelBtn');
@@ -178,7 +187,7 @@ const addForms = (function() {
     // listen
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
     if (e.target.id === "editToDo") {
-      toDoFormSaveBtn.addEventListener('click', editElements.editToDo);
+      toDoFormSaveBtn.addEventListener('click', addElements.editToDo);
     } else {
       toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
     }
