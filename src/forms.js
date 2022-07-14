@@ -1,4 +1,4 @@
-import { addElements, deleteElements }  from "./ui";
+import { addElements, deleteElements, editElements }  from "./ui";
 import loadProjects from "./projects";
 
 const addForms = (function() {
@@ -176,8 +176,12 @@ const addForms = (function() {
     toDoFormDiv.appendChild(toDoFormSaveBtn);
     toDoFormDiv.appendChild(toDoFormCancelBtn);
     // listen
-    toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
+    if (e.target.id === "editToDo") {
+      toDoFormSaveBtn.addEventListener('click', editElements.editToDo);
+    } else {
+      toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
+    }
   };
 
 
