@@ -76,6 +76,7 @@ body {
   justify-content: space-between;
 }
 
+/* add a class on all icons for the below styling */
 #deletePrj {
   height: 1rem;
 }

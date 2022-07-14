@@ -88,8 +88,8 @@ const loadProjects = (function() {
     toDoItem.setAttribute('id', 'toDoItem');
     toDoItem.innerHTML = `${toDo.title}: ${toDo.description}<br />
     Goal Completion: ${toDo.date}`;
-    // toDoIcons.setAttribute('id', 'toDoIcons');
-
+    toDoItem.style.border = "2px solid var(--todo-light)";
+    toDoIcons.setAttribute('id', 'toDoIcons');
     toDoCompletedIcon.setAttribute('id', 'completedToDo');
     toDoCompletedIcon.setAttribute('src', './images/check-bold.png');
     toDoCompletedIcon.setAttribute('alt', 'mark as completed icon');
@@ -116,7 +116,7 @@ const loadProjects = (function() {
     toDoIcons.append(toDoCompletedIcon);
     toDoIcons.append(toDoEditIcon);
     toDoIcons.append(toDoDeleteIcon);
-    // priority color (make this a separate function and add to this one?)
+    // priority color (make separate function?)
     if (toDo.priority === "urgent") {
       toDoItem.style.backgroundColor = 'var(--urgent)';
     } else if (toDo.priority === "soon") {
@@ -126,7 +126,6 @@ const loadProjects = (function() {
     } else {                                          
       toDoItem.style.backgroundColor = 'var(--project-light)' 
       toDoItem.style.setProperty('text-decoration', "line-through");
-      toDoItem.style.border = "2px solid var(--todo-light)";
       toDoCompletedIcon.remove();
     };
     // event listeners
