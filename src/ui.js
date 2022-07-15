@@ -122,13 +122,13 @@ const editElements = (function() {
 
 
 // EXPAND AND MINIMIZE MODULE
-const interfaceElements = (function(e) {
+const interfaceElements = (function(S) {
 
   // minimize
   const minimize = function(e) {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    
+
     const card = document.getElementById(e.target.getAttribute("data-position"));
     const cardToDoList = card.getElementsByTagName('h4')[0];
     //display
@@ -140,7 +140,32 @@ const interfaceElements = (function(e) {
     }
   }
 
-  return { minimize };
+  const expand = function(e) {
+    let myProjects = [];
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
+
+    const card = document.getElementById(e.target.getAttribute("data-position"));
+    const cardToDoList = card.getElementsByTagName('h4')[0];
+    //display
+    cardToDoList.style.display = "block";
+    for(let i = 0; i < myProjects[e.target.getAttribute("data-position")]
+    .toDoArray.length; i++){
+      let toDoItem = card.getElementsByTagName('h6')[i];
+      toDoItem.style.display = "block";
+    }
+  };
+
+  const toggle = function(e) {
+    const card = document.getElementById(e.target.getAttribute("data-position"));
+    console.log(card.style.display); // only works for "none";
+    if (card.getElementsByTagName('h4')[0].style.display === "") {
+      minimize(e);
+    } else {
+      expand(e)
+    }
+  };
+
+  return { toggle };
 })(); 
 
 

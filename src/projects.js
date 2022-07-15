@@ -66,22 +66,8 @@ const loadProjects = (function() {
     // event listeners
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
-    expandIcon.addEventListener('dblclick', interfaceElements.minimize);
+    expandIcon.addEventListener('dblclick', interfaceElements.toggle);
   };
-
-  // const minimize = function(e) {
-  //   let myProjects = [];
-  //   myProjects = JSON.parse(localStorage.getItem('myProjects'));
-  //   const card = document.getElementById(e.target.getAttribute("data-position"));
-  //   const cardToDoList = card.getElementsByTagName('h4')[0];
-  //   //display
-  //   cardToDoList.style.display = "none";
-  //   for(let i = 0; i < myProjects[e.target.getAttribute("data-position")]
-  //   .toDoArray.length; i++){
-  //     let toDoItem = card.getElementsByTagName('h6')[i];
-  //     toDoItem.style.display = "none";
-  //   }
-  // };
 
   // ADD ALL TODOS
   const addAllToDos = function(toDo, projIndex){
