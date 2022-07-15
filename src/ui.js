@@ -59,7 +59,6 @@ const addElements = (function() {
       return false;
     } else {
       let newToDo = new ToDo(title, description, date, priority);
-      console.log(e.target.getAttribute('data-todo')); // null for new (number for not)
       if (e.target.getAttribute('data-todo') === null) {
         myProjects[`${e.target.getAttribute('data-position')}`]
         .toDoArray.push(newToDo); 
@@ -113,7 +112,6 @@ const editElements = (function() {
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    // styling changes in addAllToDos function (should I change for dependency?)
     location.reload();
   };
 
@@ -124,15 +122,28 @@ const editElements = (function() {
 
 
 // EXPAND AND MINIMIZE MODULE
-const interfaceElements = (function(e) {
+// const interfaceElements = (function(e) {
 
-  // expand
-  const expand = function() {
-    console.log('working');
-  }
+//   // expand
+//   const minimize = function(e) {
+//     let myProjects = [];
+//     myProjects = JSON.parse(localStorage.getItem('myProjects'));
+//     // console.log(e.target.getAttribute("data-position"));
 
-  return { expand };
-})(); 
+//     // these are all grabbing the first one...except card(e)
+//     const card = document.getElementById(e.target.getAttribute("data-position"));
+    
+//     // cardToDoList.style.display = 'none';
+//     card.style.display = "none";
+
+  
+//     //if expanded minimize
+//     //if mimimized, expanded
+//     //separate function for doing the work
+//   }
+
+//   return { minimize };
+// })(); 
 
 
 
@@ -140,5 +151,5 @@ export {
   addElements, 
   deleteElements,
   editElements,
-  interfaceElements
+  // interfaceElements
 };

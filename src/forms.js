@@ -187,11 +187,6 @@ const addForms = (function() {
     // listen
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
     toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
-    // if (e.target.id === "editToDo") {
-    //   toDoFormSaveBtn.addEventListener('click', addElements.editToDo);
-    // } else {
-    //   toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
-    // }
   };
 
 

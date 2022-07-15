@@ -10,29 +10,21 @@ window.onload = function() {
   if (myProjects === null) {
     myProjects = [];
   }
-  loadProjects.projectsSidebar();
-  // loadProjects.addAllProjects();
-  // change above to load projects (without todo)
+  loadProjects.addAllProjects();
 };
 
 const addProjectBtn = document.getElementById('addProjectBtn');
-const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+// const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
 
 addProjectBtn.addEventListener('click', addForms.addProjectForm);
-showAllProjectsBtn.addEventListener('dblclick', loadProjects.addAllProjects);
+// showAllProjectsBtn.addEventListener('dblclick', loadProjects.addAllProjects);
 
-
-// TO DO (Today?)
-// 3. show all projects button (minimized by default)
-// - start with noprojects visible (only clickable sidebar)
-// - when you click one it becomes visible, then expandable
-// - when you click another, it switches them out
-// - if you click show all, it lists as projects, but then shows sort options
-
-// - make sidebar title clickable
-// - add priority key (sidebar)
-
+// TO DO
+//  1. minimize maximize
+//  2. clickable sidebar that display only one project (still minimize/maximize)
+//  3. when one visible, the show all button also become visible (reload basically)
+//  4. when you click another, it switches them out
+// REVISIONS LATER
 // - factory function??
-// - expand and minimize??
 // - if project already exists alert??
-// - editing todos and editing project title??
+// - sorting for ugency, date, alphabet?
