@@ -12,11 +12,12 @@ const loadProjects = (function() {
     const projectList = document.getElementById('projectList');
     projects.innerHTML = ""; //clears existing projects
     projectList.innerHTML = "";
+    projectsSidebar();
     myProjects.forEach(element => generateProjectCards(element));
   };
   // GENERATE PROJECT CARDS
   const generateProjectCards = function(stuff){
-    const projectList = document.getElementById('projectList');
+    // const projectList = document.getElementById('projectList');
     const projects = document.getElementById('projects');
     const card = document.createElement('div');
     const cardProject = document.createElement('div');
@@ -24,7 +25,7 @@ const loadProjects = (function() {
     const projectTitleIcons = document.createElement('div');
     const expandIcon = document.createElement('img');
     const projectDeleteIcon = document.createElement('img');
-    const projectTitleSidebar = document.createElement('h6');
+    // const projectTitleSidebar = document.createElement('h6');
     const toDoListHeader = document.createElement('h4')
     const addToDoBtn = document.createElement('button');
     // attributes
@@ -50,8 +51,8 @@ const loadProjects = (function() {
     addToDoBtn.setAttribute('type', 'submit');
     addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
     addToDoBtn.textContent = "+add todo item";
-    projectTitleSidebar.textContent = `${stuff.project}`;
-    projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
+    // projectTitleSidebar.textContent = `${stuff.project}`;
+    // projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
     // append 
     projects.append(card);
     card.append(cardProject);
@@ -59,19 +60,23 @@ const loadProjects = (function() {
     cardProject.append(projectTitleIcons);
     projectTitleIcons.append(expandIcon);
     projectTitleIcons.append(projectDeleteIcon);
-    card.append(toDoListHeader);
+    // card.append(toDoListHeader);                   // SHOW ALL (and above)
     // --append todos
-    let projIndex = `${myProjects.indexOf(stuff)}`;
-    myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo => 
-      addAllToDos(toDo, projIndex));
-    // --append addToDoBtn  
-    card.append(addToDoBtn);
+
+    // let projIndex = `${myProjects.indexOf(stuff)}`;
+    // myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo =>
+    //   addAllToDos(toDo, projIndex));               // SHOW ALL
+
+    // --append addToDoBtn                            // SHOW ALL
+
+    // card.append(addToDoBtn);                       // SHOW ALL
+
     // event listeners
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
     expandIcon.addEventListener('click', interfaceElements.expand)
     // --append projects to sidebar
-    projectList.append(projectTitleSidebar);
+    // projectList.append(projectTitleSidebar);          //  Cut and mvoe to onload
   };
 
   // ADD ALL TODOS
@@ -134,7 +139,22 @@ const loadProjects = (function() {
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 
-  return { addAllProjects };
+  const projectsSidebar = function(stuff) {
+    const projects = document.getElementById('projects');
+    projects.innerHTML = ""; //clears existing projects
+    projectList.innerHTML = "";
+    myProjects.forEach(element => generateSidebar(element));
+  };
+
+  const generateSidebar = function(title) {
+    const projectList = document.getElementById('projectList');
+    const projectTitleSidebar = document.createElement('h6');
+    projectTitleSidebar.textContent = `${title.project}`;
+    projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
+    projectList.append(projectTitleSidebar); 
+  };
+
+  return { addAllProjects, projectsSidebar };
 })(); 
 
 export default loadProjects;
