@@ -22,7 +22,7 @@ const loadProjects = (function() {
     const cardProject = document.createElement('div');
     const projectTitle = document.createElement('h2');
     const projectTitleIcons = document.createElement('div');
-    const expandIcon = document.createElement('img');
+    const minimizeIcon = document.createElement('img');
     const projectDeleteIcon = document.createElement('img');
     const toDoListHeader = document.createElement('h4')
     const addToDoBtn = document.createElement('button');
@@ -33,11 +33,11 @@ const loadProjects = (function() {
     projectTitle.setAttribute('id', 'projectTitle');
     projectTitle.textContent = `Project: ${stuff.project}`;
     projectTitleIcons.setAttribute('id', 'projectTitleIcons');
-    expandIcon.setAttribute('id', 'expand');
-    expandIcon.setAttribute('src', './images/format-list-bulleted-square.png');
-    expandIcon.setAttribute('alt', 'expand project');
-    expandIcon.setAttribute('title', 'minimize');
-    expandIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
+    minimizeIcon.setAttribute('id', 'minimize');
+    minimizeIcon.setAttribute('src', './images/window-minimize.png');
+    minimizeIcon.setAttribute('alt', 'minimize todo list');
+    minimizeIcon.setAttribute('title', 'hide or show todo list');
+    minimizeIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
     projectDeleteIcon.setAttribute('id', 'deletePrj');
     projectDeleteIcon.setAttribute('src', './images/delete-alert.png');
     projectDeleteIcon.setAttribute('alt', 'delete project icon');
@@ -54,9 +54,9 @@ const loadProjects = (function() {
     card.append(cardProject);
     cardProject.append(projectTitle);
     cardProject.append(projectTitleIcons);
-    projectTitleIcons.append(expandIcon);
+    projectTitleIcons.append(minimizeIcon); // HERE
     projectTitleIcons.append(projectDeleteIcon);
-    card.append(toDoListHeader);
+    card.append(toDoListHeader); 
     // --append todos
     let projIndex = `${myProjects.indexOf(stuff)}`;
     myProjects[`${myProjects.indexOf(stuff)}`].toDoArray.forEach(toDo =>
@@ -66,7 +66,7 @@ const loadProjects = (function() {
     // event listeners
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
-    expandIcon.addEventListener('dblclick', interfaceElements.toggle);
+    minimizeIcon.addEventListener('click', interfaceElements.toggle);
   };
 
   // ADD ALL TODOS
@@ -126,8 +126,7 @@ const loadProjects = (function() {
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 
-  const projectsSidebar = function(stuff) {
-    const projects = document.getElementById('projects');
+  const projectsSidebar = function() {
     projectList.innerHTML = "";
     myProjects.forEach(element => generateSidebar(element));
   };
@@ -136,8 +135,20 @@ const loadProjects = (function() {
     const projectList = document.getElementById('projectList');
     const projectTitleSidebar = document.createElement('h6');
     projectTitleSidebar.textContent = `${title.project}`;
-    projectTitleSidebar.setAttribute('id', 'projectTitleSidebar');
+    projectTitleSidebar.setAttribute('class', 'projectTitleSidebar');
     projectList.append(projectTitleSidebar); 
+    projectTitleSidebar.addEventListener('dblclick', focusProject);
+  };
+
+  const focusProject = function(e) {
+    console.log(e.target.innerHTML);
+    console.log(e.target);
+
+    const projects = document.getElementById('projects');
+    const projectList = document.getElementById('projectList');
+    projects.innerHTML = "";
+    // write function that only displays one (parse out addAllProjects)
+    // or do add all projects, but hide all the cards that aren't needed
   };
 
   return { addAllProjects, projectsSidebar };
