@@ -128,7 +128,6 @@ const interfaceElements = (function(S) {
   const minimize = function(e) {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-
     const card = document.getElementById(e.target.getAttribute("data-position"));
     const cardToDoList = card.getElementsByTagName('h4')[0];
     //display
@@ -143,7 +142,6 @@ const interfaceElements = (function(S) {
   const expand = function(e) {
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-
     const card = document.getElementById(e.target.getAttribute("data-position"));
     const cardToDoList = card.getElementsByTagName('h4')[0];
     //display
@@ -157,8 +155,7 @@ const interfaceElements = (function(S) {
 
   const toggle = function(e) {
     const card = document.getElementById(e.target.getAttribute("data-position"));
-    console.log(card.style.display); // only works for "none";
-    if (card.getElementsByTagName('h4')[0].style.display === "") {
+    if (card.getElementsByTagName('h4')[0].style.display === "" || card.getElementsByTagName('h4')[0].style.display === "block") {
       minimize(e);
     } else {
       expand(e)
