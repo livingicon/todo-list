@@ -122,28 +122,26 @@ const editElements = (function() {
 
 
 // EXPAND AND MINIMIZE MODULE
-// const interfaceElements = (function(e) {
+const interfaceElements = (function(e) {
 
-//   // expand
-//   const minimize = function(e) {
-//     let myProjects = [];
-//     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-//     // console.log(e.target.getAttribute("data-position"));
-
-//     // these are all grabbing the first one...except card(e)
-//     const card = document.getElementById(e.target.getAttribute("data-position"));
+  // minimize
+  const minimize = function(e) {
+    let myProjects = [];
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
     
-//     // cardToDoList.style.display = 'none';
-//     card.style.display = "none";
+    const card = document.getElementById(e.target.getAttribute("data-position"));
+    const cardToDoList = card.getElementsByTagName('h4')[0];
+    //display
+    cardToDoList.style.display = "none";
+    for(let i = 0; i < myProjects[e.target.getAttribute("data-position")]
+    .toDoArray.length; i++){
+      let toDoItem = card.getElementsByTagName('h6')[i];
+      toDoItem.style.display = "none";
+    }
+  }
 
-  
-//     //if expanded minimize
-//     //if mimimized, expanded
-//     //separate function for doing the work
-//   }
-
-//   return { minimize };
-// })(); 
+  return { minimize };
+})(); 
 
 
 
@@ -151,5 +149,5 @@ export {
   addElements, 
   deleteElements,
   editElements,
-  // interfaceElements
+  interfaceElements
 };
