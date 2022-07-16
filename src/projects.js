@@ -84,8 +84,8 @@ const loadProjects = (function() {
     const toDoDeleteIcon = document.createElement('img');
     //attributes
     toDoItem.setAttribute('id', 'toDoItem');
-    toDoItem.innerHTML = `${toDo.title}: ${toDo.description}<br />
-    Goal Completion: ${toDo.date}`;
+    toDoItem.innerHTML = `&nbsp;&nbsp;${toDo.title}: ${toDo.description}<br />
+    &nbsp;&nbsp;Goal Completion: ${toDo.date}`;
     toDoItem.style.border = "2px solid var(--todo-light)";
     toDoIcons.setAttribute('id', 'toDoIcons');
     toDoCompletedIcon.setAttribute('id', 'completedToDo');

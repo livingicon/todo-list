@@ -166,8 +166,9 @@ const addForms = (function() {
     toDoFormCancelBtn.setAttribute('type', 'button');
     toDoFormCancelBtn.textContent = 'cancel';
     toDoFormCancelBtn.style.backgroundColor = "var(--urgent)"
+    toDoFormCancelBtn.setAttribute('data-position', `${position}`);
     // append
-    projects.innerHTML = ""; // removes projects so only form is visible
+    projects.innerHTML = "";
     projects.appendChild(toDoForm);
     toDoForm.appendChild(toDoFormDiv);
     toDoFormDiv.appendChild(toDoFormTitleDiv);
@@ -188,9 +189,31 @@ const addForms = (function() {
     toDoFormPrioritySelect.appendChild(priorityCompleted);
     toDoFormDiv.appendChild(toDoFormSaveBtn);
     toDoFormDiv.appendChild(toDoFormCancelBtn);
-    // listen
-    toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
+    // listeners    
+    if (cardDisplay === "") {
+      toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
+    } else {
+      toDoFormCancelBtn.addEventListener('click', cancelEditProjects);
+    }
     toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
+  };
+
+  const cancelEditProjects = function(e) {
+    let myProjects = [];
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    loadProjects.addAllProjects();
+    for(let i = 0; i < myProjects.length; i++) {
+      if (myProjects[i] === myProjects[e.target.getAttribute('data-position')]) {
+        let nonHidden = document.getElementById(`${i}`);
+        nonHidden.style.display = "block";
+      } else {
+        let hidden = document.getElementById(`${i}`);
+        hidden.style.display = 'none';
+      }
+    }
+    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+    showAllProjectsBtn.style.display = "block";
+    showAllProjectsBtn.addEventListener('click', loadProjects.addAllProjects);
   };
 
   return { addProjectForm, addToDoForm };

@@ -1,6 +1,5 @@
 
 /* GENERAL */
-
 :root {
   /* general */
   --primary-dark: #262626;
@@ -50,18 +49,16 @@ img {
   border-radius: 25%;
   background-color: var(--secondary-dark);
   height: .9rem;
-  margin: 1px;
+  margin: 3px 1px 1px 1px;
 }
 
 /* HEADER */
-
 .header {
   background-color: var(--primary-dark);
-
+  padding: 5px;
 }
 
 /* SIDEBAR */
-
 #prjListSidebarTitle {
   cursor: pointer;
   font-size: 1.5rem;
@@ -69,11 +66,9 @@ img {
 }
 
 .projectTitleSidebar {
-  margin: 3px 15px;
+  margin: 3px 22px;
   color: var(--secondary-light)
 }
-
-
 
 .projectTitleSidebar:hover {
   color: var(--project-light);
@@ -81,7 +76,6 @@ img {
 }
 
 /* BODY */
-
 .body {
   display: grid;
   grid-template-columns: 1fr 6fr;
@@ -92,7 +86,6 @@ img {
 }
 
 /* PROJECT FORM */
-
 #projectForm,
 #toDoForm {
   background-color: var(--project-dark);
@@ -100,9 +93,9 @@ img {
 }
 
 /* CARD */
-
 .card {
   max-width: 300px;
+  min-width: 162px;
   background-color: var(--project-light);
   margin: 20px;
   border-radius: 15px;
@@ -116,33 +109,44 @@ img {
   border-radius: 15px 15px 0 0;
 }
 
-/* add a class on all icons for the below styling */
-/* #deletePrj {
-  height: 1rem;
-} */
+#deletePrj {
+margin-right: 8px;
+}
 
 #deletePrj:hover {
   background-color: var(--urgent);
 }
 
 #projectTitle {
-  margin: 0;
+  margin: 2px 7px;
   cursor: pointer;
 }
 
 #toDoListHeader {
-  margin: 0;
+  margin: 2px 7px 6px;
 }
 
 #toDoItem {
-  margin: 0 5px;
+  margin: -2px 7px;
   border-radius: 10px;
 }
 
-/* FOOTER */
+#text {
+  margin-left: 10px;
+}
 
+#deleteToDo {
+  margin-left: 4px;
+}
+
+#addToDoBtn {
+  margin: 4px 7px 5px;
+}
+
+/* FOOTER */
 .footer {
   background-color: var(--primary-dark);
   display: flex;
   justify-content: center;
+  padding: 5px;
 }

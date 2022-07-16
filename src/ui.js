@@ -35,7 +35,6 @@ const addElements = (function() {
       return false;
     } else {
       let newProject = new Project(project);
-      // myProjects.push(newProject);
       myProjects.unshift(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
       loadProjects.addAllProjects();
@@ -92,11 +91,9 @@ const deleteElements = (function() {
   const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-
     const displayStyle = 
     document.getElementById(e.target.getAttribute("data-position"));
     if (displayStyle.style.display === "") {
