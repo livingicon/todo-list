@@ -17,14 +17,12 @@ const addProjectBtn = document.getElementById('addProjectBtn');
 const prjListSidebarTitle = document.getElementById('prjListSidebarTitle');
 
 addProjectBtn.addEventListener('click', addForms.addProjectForm);
-prjListSidebarTitle.addEventListener('dblclick', loadProjects.addAllProjects)
+prjListSidebarTitle.addEventListener('click', loadProjects.addAllProjects)
 
 
 
 // TO DO
-//  1. when one visible, the show all button also become visible (reload basically)
-//  2. edit and delete when only one selected keep only that one selected
-//  2. sidebar hover change color
+//  1. edit and delete when only one selected keep only that one selected
 
 // REVISIONS LATER
 // - factory function??

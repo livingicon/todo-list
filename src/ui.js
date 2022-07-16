@@ -41,7 +41,7 @@ const addElements = (function() {
       // myProjects.push(newProject);
       myProjects.unshift(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      location.reload();
+      loadProjects.addAllProjects();
 
     }
   };
@@ -68,7 +68,7 @@ const addElements = (function() {
         .toDoArray.splice(e.target.getAttribute("data-todo"), 1, newToDo);
       }
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      location.reload();
+      loadProjects.addAllProjects();
     }
   };
 
@@ -85,7 +85,7 @@ const deleteElements = (function() {
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
     myProjects.splice(e.target.getAttribute("data-position"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-    location.reload();
+    loadProjects.addAllProjects();
   };
   // delete todo
   const deleteToDo = function(e) { 
@@ -94,7 +94,11 @@ const deleteElements = (function() {
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    location.reload();
+    // only load all projects if not selected, if selected only load that project
+    // let position = e.target.getAttribute('data-position');
+    // loadProjects.addAllProjects();
+    loadProjects.focusProject(e);
+
   };
 
   return { deleteProject, deleteToDo };
@@ -113,7 +117,7 @@ const editElements = (function() {
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    location.reload();
+    loadProjects.addAllProjects();
   };
 
   return { toDoCompleted };

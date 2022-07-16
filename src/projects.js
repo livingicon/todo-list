@@ -4,10 +4,9 @@ import addForms from "./forms";
 const loadProjects = (function() {
 
   let myProjects = [];
-  myProjects = JSON.parse(localStorage.getItem('myProjects'));
-
   // ADD ALL PROJECTS
   const addAllProjects = function(){
+    myProjects = JSON.parse(localStorage.getItem('myProjects'));
     const projects = document.getElementById('projects');
     const projectList = document.getElementById('projectList');
     projects.innerHTML = "";
@@ -49,17 +48,17 @@ const loadProjects = (function() {
     projectDeleteIcon.setAttribute('title', 'delete project');
     projectDeleteIcon.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
     toDoListHeader.setAttribute('id', 'toDoListHeader');
-    toDoListHeader.textContent = `${stuff.project} To Do List:`;
+    toDoListHeader.textContent = `${stuff.project} task list:`;
     addToDoBtn.setAttribute('id', 'addToDoBtn');
     addToDoBtn.setAttribute('type', 'submit');
     addToDoBtn.setAttribute('data-position', `${myProjects.indexOf(stuff)}`);
-    addToDoBtn.textContent = "+add todo item";
+    addToDoBtn.textContent = "add task";
     // append 
     projects.append(card);
     card.append(cardProject);
     cardProject.append(projectTitle);
     cardProject.append(projectTitleIcons);
-    projectTitleIcons.append(minimizeIcon); // HERE
+    projectTitleIcons.append(minimizeIcon);
     projectTitleIcons.append(projectDeleteIcon);
     card.append(toDoListHeader); 
     // --append todos
@@ -91,7 +90,7 @@ const loadProjects = (function() {
     toDoCompletedIcon.setAttribute('id', 'completedToDo');
     toDoCompletedIcon.setAttribute('src', './images/check-bold.png');
     toDoCompletedIcon.setAttribute('alt', 'mark as completed icon');
-    toDoCompletedIcon.setAttribute('title', 'mark completed');
+    toDoCompletedIcon.setAttribute('title', 'mark complete or incomplete');
     let todoIndex = `${myProjects[projIndex].toDoArray.indexOf(toDo)}`;
     toDoCompletedIcon.setAttribute('data-position', `${projIndex}`)
     toDoCompletedIcon.setAttribute('data-todo', `${todoIndex}`);
@@ -110,9 +109,9 @@ const loadProjects = (function() {
     // append
     card.appendChild(toDoItem);
     toDoItem.append(toDoIcons);
-    toDoIcons.append(toDoCompletedIcon);
-    toDoIcons.append(toDoEditIcon);
     toDoIcons.append(toDoDeleteIcon);
+    toDoIcons.append(toDoEditIcon);
+    toDoIcons.append(toDoCompletedIcon);
     // priority color (make separate function?)
     if (toDo.priority === "urgent") {
       toDoItem.style.backgroundColor = 'var(--urgent)';
@@ -126,8 +125,8 @@ const loadProjects = (function() {
       toDoCompletedIcon.remove();
     }
     // event listeners
-    toDoCompletedIcon.addEventListener('dblclick', editElements.toDoCompleted);
-    toDoEditIcon.addEventListener('dblclick', addForms.addToDoForm);
+    toDoCompletedIcon.addEventListener('click', editElements.toDoCompleted);
+    toDoEditIcon.addEventListener('click', addForms.addToDoForm);
     toDoDeleteIcon.addEventListener('dblclick', deleteElements.deleteToDo);
   };
 
@@ -143,11 +142,14 @@ const loadProjects = (function() {
     projectTitleSidebar.setAttribute('class', 'projectTitleSidebar')
     projectTitleSidebar.setAttribute('id', `${title.project}`);
     projectList.append(projectTitleSidebar); 
-    projectTitleSidebar.addEventListener('dblclick', focusProject);
+    projectTitleSidebar.addEventListener('click', focusProject);
   };
 
   const focusProject = function(e) {
     const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+
+    console.log(myProjects[e.target.getAttribute('data-position')].project);
+    
     for(let i = 0; i < myProjects.length; i++) {
       if (myProjects[i].project !== e.target.id) {
         let hidden = document.getElementById(`${i}`);

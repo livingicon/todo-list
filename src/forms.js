@@ -95,7 +95,10 @@ const addForms = (function() {
       toDoFormDueDateInput.setAttribute
       ('value', `${myProjects[e.target.getAttribute("data-position")]
       .toDoArray[e.target.getAttribute("data-todo")].date}`);
-    } 
+    } else {
+      let today = new Date().toISOString().slice(0, 10)
+      toDoFormDueDateInput.setAttribute('value', `${today}`);
+    }
     // --todo priority
     const toDoFormPriorityDiv = document.createElement('div');
     const toDoFormPriorityLabel = document.createElement('label');
