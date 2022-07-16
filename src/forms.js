@@ -31,7 +31,7 @@ const addForms = (function() {
     projectFormCancelBtn.textContent = 'cancel';
     projectFormCancelBtn.style.backgroundColor = "var(--urgent)"
     // append
-    projects.innerHTML = ""; // removes projects so only form is visible
+    projects.innerHTML = "";
     projects.appendChild(projectForm);
     projectForm.appendChild(projectFormDiv)
     projectFormDiv.appendChild(projectFormLabel);

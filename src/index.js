@@ -20,10 +20,10 @@ addProjectBtn.addEventListener('click', addForms.addProjectForm);
 // showAllProjectsBtn.addEventListener('dblclick', loadProjects.addAllProjects);
 
 // TO DO
-//  1. minimize maximize
 //  2. clickable sidebar that display only one project (still minimize/maximize)
 //  3. when one visible, the show all button also become visible (reload basically)
 //  4. when you click another, it switches them out
+//  5. sidebar hover change color
 // REVISIONS LATER
 // - factory function??
 // - if project already exists alert??

@@ -135,20 +135,28 @@ const loadProjects = (function() {
     const projectList = document.getElementById('projectList');
     const projectTitleSidebar = document.createElement('h6');
     projectTitleSidebar.textContent = `${title.project}`;
-    projectTitleSidebar.setAttribute('class', 'projectTitleSidebar');
+    projectTitleSidebar.setAttribute('class', 'projectTitleSidebar')
+    projectTitleSidebar.setAttribute('id', `${title.project}`);
     projectList.append(projectTitleSidebar); 
     projectTitleSidebar.addEventListener('dblclick', focusProject);
   };
 
   const focusProject = function(e) {
-    console.log(e.target.innerHTML);
-    console.log(e.target);
+    // let myProjects = [];
+    // myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    
+    // const sidebarIndex = myProjects.findIndex(object => {
+    //   return object.project === e.target.id;
+    // });
 
-    const projects = document.getElementById('projects');
-    const projectList = document.getElementById('projectList');
-    projects.innerHTML = "";
-    // write function that only displays one (parse out addAllProjects)
-    // or do add all projects, but hide all the cards that aren't needed
+    // const card = document.getElementById(sidebarIndex);
+
+    for(let i = 0; i < myProjects.length; i++) {
+      if (myProjects[i].project !== e.target.id) {
+        let hidden = document.getElementById(`${i}`);
+        hidden.style.display = 'none';
+      }
+    }
   };
 
   return { addAllProjects, projectsSidebar };
