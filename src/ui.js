@@ -1,9 +1,6 @@
 import loadProjects from "./projects";
 import addForms from "./forms";
 
-
-
-
 // ADD ELEMENTS MODULE
 const addElements = (function() {
   // CONSTRUCTORS
@@ -80,8 +77,6 @@ const addElements = (function() {
   return { addProject, addToDo };
 })(); 
 
-
-
 // DELETE ELEMENTS MODULE
 const deleteElements = (function() {
   // delete project
@@ -114,9 +109,6 @@ const deleteElements = (function() {
   return { deleteProject, deleteToDo };
 })();  
 
-
-
-
 // EDIT MODULE
 const editElements = (function() {
   
@@ -139,9 +131,6 @@ const editElements = (function() {
 
   return { toDoCompleted };
 })(); 
-
-
-
 
 // EXPAND AND MINIMIZE MODULE
 const interfaceElements = (function(S) {
@@ -177,7 +166,8 @@ const interfaceElements = (function(S) {
 
   const toggle = function(e) {
     const card = document.getElementById(e.target.getAttribute("data-position"));
-    if (card.getElementsByTagName('h4')[0].style.display === "" || card.getElementsByTagName('h4')[0].style.display === "block") {
+    if (card.getElementsByTagName('h4')[0].style.display === "" || 
+    card.getElementsByTagName('h4')[0].style.display === "block") {
       minimize(e);
     } else {
       expand(e)
@@ -186,8 +176,6 @@ const interfaceElements = (function(S) {
 
   return { toggle };
 })(); 
-
-
 
 export { 
   addElements, 

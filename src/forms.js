@@ -43,7 +43,6 @@ const addForms = (function() {
     projectFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
   };
 
-
   // ADD TODO FORM FUNCTION
   const addToDoForm = function(e) {
     let myProjects = [];
@@ -193,8 +192,6 @@ const addForms = (function() {
     toDoFormCancelBtn.addEventListener('click', loadProjects.addAllProjects);
     toDoFormSaveBtn.addEventListener('click', addElements.addToDo);
   };
-
-
 
   return { addProjectForm, addToDoForm };
 })();

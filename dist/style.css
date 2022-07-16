@@ -101,6 +101,7 @@ img {
 
 #projectTitle {
   margin: 0;
+  cursor: pointer;
 }
 
 #toDoListHeader {

@@ -68,6 +68,7 @@ const loadProjects = (function() {
     // --append addToDoBtn
     card.append(addToDoBtn);
     // event listeners
+    projectTitle.addEventListener('click', focusTitles);
     projectDeleteIcon.addEventListener('dblclick', deleteElements.deleteProject);
     addToDoBtn.addEventListener('click', addForms.addToDoForm);
     minimizeIcon.addEventListener('click', interfaceElements.toggle);
@@ -176,6 +177,30 @@ const loadProjects = (function() {
     showAllProjectsBtn.addEventListener('click', addAllProjects);
   };
 
+  const focusTitles = function(e) {
+    const string = e.target.innerHTML;
+    addAllProjects();
+    for(let i = 0; i < myProjects.length; i++) {
+      if (myProjects[i].project === removeFirstWord(string)) {
+        let nonHidden = document.getElementById(`${i}`);
+        nonHidden.style.display = "block";
+      } else {
+        let hidden = document.getElementById(`${i}`);
+        hidden.style.display = 'none';
+      }
+    }
+    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+    showAllProjectsBtn.style.display = "block";
+    showAllProjectsBtn.addEventListener('click', addAllProjects);
+  };
+
+  function removeFirstWord(str) {
+    const indexOfSpace = str.indexOf(' ');
+    if (indexOfSpace === -1) {
+      return '';
+    }
+    return str.substring(indexOfSpace + 1);
+  }
 
   return { addAllProjects, projectsSidebar, focusEdits };
 })(); 
