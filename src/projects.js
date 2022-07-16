@@ -142,22 +142,18 @@ const loadProjects = (function() {
   };
 
   const focusProject = function(e) {
-    // let myProjects = [];
-    // myProjects = JSON.parse(localStorage.getItem('myProjects'));
-    
-    // const sidebarIndex = myProjects.findIndex(object => {
-    //   return object.project === e.target.id;
-    // });
-
-    // const card = document.getElementById(sidebarIndex);
 
     for(let i = 0; i < myProjects.length; i++) {
       if (myProjects[i].project !== e.target.id) {
         let hidden = document.getElementById(`${i}`);
         hidden.style.display = 'none';
+      } else {
+        let nonHidden = document.getElementById(`${i}`);
+        nonHidden.style.display = "block";
       }
     }
   };
+  // resets when another is clicked?
 
   return { addAllProjects, projectsSidebar };
 })(); 
