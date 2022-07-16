@@ -20,10 +20,6 @@ addProjectBtn.addEventListener('click', addForms.addProjectForm);
 prjListSidebarTitle.addEventListener('click', loadProjects.addAllProjects)
 
 
-
-// TO DO
-//  1. edit and delete when only one selected keep only that one selected
-
 // REVISIONS LATER
 // - factory function??
 // - if project already exists alert??

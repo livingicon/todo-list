@@ -60,15 +60,20 @@ const addElements = (function() {
       return false;
     } else {
       let newToDo = new ToDo(title, description, date, priority);
-      if (e.target.getAttribute('data-todo') === null) {
+      if (e.target.getAttribute('data-todo') === null) { // new toDo
         myProjects[`${e.target.getAttribute('data-position')}`]
         .toDoArray.push(newToDo); 
-      } else {
+      } else { // editing toDo
         myProjects[e.target.getAttribute("data-position")]
         .toDoArray.splice(e.target.getAttribute("data-todo"), 1, newToDo);
       }
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
-      loadProjects.addAllProjects();
+      const cardDisplay = e.target.getAttribute('data-display');
+      if (cardDisplay === "") {
+        loadProjects.addAllProjects();
+      } else {
+        loadProjects.focusEdits(e);
+      }
     }
   };
 
@@ -87,18 +92,23 @@ const deleteElements = (function() {
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
     loadProjects.addAllProjects();
   };
+
   // delete todo
   const deleteToDo = function(e) { 
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray.splice(e.target.getAttribute("data-todo"), 1);
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    // only load all projects if not selected, if selected only load that project
-    // let position = e.target.getAttribute('data-position');
-    // loadProjects.addAllProjects();
-    loadProjects.focusProject(e);
 
+    const displayStyle = 
+    document.getElementById(e.target.getAttribute("data-position"));
+    if (displayStyle.style.display === "") {
+      loadProjects.addAllProjects();
+    } else {
+      loadProjects.focusEdits(e);
+    }
   };
 
   return { deleteProject, deleteToDo };
@@ -118,6 +128,14 @@ const editElements = (function() {
     .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
     loadProjects.addAllProjects();
+
+    // const displayStyle = 
+    // document.getElementById(e.target.getAttribute("data-position"));
+    // if (displayStyle.style.display === "") {
+    //   loadProjects.addAllProjects();
+    // } else {
+    //   loadProjects.focusEdits(e);
+    // }
   };
 
   return { toDoCompleted };

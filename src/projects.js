@@ -142,28 +142,42 @@ const loadProjects = (function() {
     projectTitleSidebar.setAttribute('class', 'projectTitleSidebar')
     projectTitleSidebar.setAttribute('id', `${title.project}`);
     projectList.append(projectTitleSidebar); 
-    projectTitleSidebar.addEventListener('click', focusProject);
+    projectTitleSidebar.addEventListener('click', focusSidebar);
   };
 
-  const focusProject = function(e) {
-    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
-
-    console.log(myProjects[e.target.getAttribute('data-position')].project);
-    
+  const focusSidebar = function(e) {
     for(let i = 0; i < myProjects.length; i++) {
-      if (myProjects[i].project !== e.target.id) {
-        let hidden = document.getElementById(`${i}`);
-        hidden.style.display = 'none';
-      } else {
+      if (myProjects[i].project === e.target.id) {
         let nonHidden = document.getElementById(`${i}`);
         nonHidden.style.display = "block";
+      } else {
+        let hidden = document.getElementById(`${i}`);
+        hidden.style.display = 'none';
       }
     }
+    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
     showAllProjectsBtn.style.display = "block";
     showAllProjectsBtn.addEventListener('click', addAllProjects);
   };
 
-  return { addAllProjects, projectsSidebar, focusProject };
+  const focusEdits = function(e) {
+    addAllProjects();
+    for(let i = 0; i < myProjects.length; i++) {
+      if (myProjects[i].project === myProjects[e.target.getAttribute('data-position')].project) {
+        let nonHidden = document.getElementById(`${i}`);
+        nonHidden.style.display = "block";
+      } else {
+        let hidden = document.getElementById(`${i}`);
+        hidden.style.display = 'none';
+      }
+    }
+    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+    showAllProjectsBtn.style.display = "block";
+    showAllProjectsBtn.addEventListener('click', addAllProjects);
+  };
+
+
+  return { addAllProjects, projectsSidebar, focusEdits };
 })(); 
 
 export default loadProjects;

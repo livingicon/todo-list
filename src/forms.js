@@ -152,8 +152,10 @@ const addForms = (function() {
     toDoFormSaveBtn.setAttribute('type', 'submit');
     toDoFormSaveBtn.textContent = "save";
     toDoFormSaveBtn.style.backgroundColor = "var(--later)"
-
-    let position = e.target.getAttribute('data-position'); // Here data position is changed for edit?
+    const cardDisplay = document
+    .getElementById(e.target.getAttribute('data-position')).style.display;
+    toDoFormSaveBtn.setAttribute('data-display', `${cardDisplay}`)
+    let position = e.target.getAttribute('data-position');
     toDoFormSaveBtn.setAttribute('data-position', `${position}`);
     if (e.target.id === "editToDo") {
       toDoFormSaveBtn.setAttribute('data-todo', `${e.target.getAttribute("data-todo")}`);
