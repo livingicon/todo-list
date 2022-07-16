@@ -30,9 +30,27 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+button {
+  background-color: var(--project-dark);
+  color: var(--primary-light);
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 3px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  border-style: none;
+}
+
 button,
 img {
   cursor: pointer;
+}
+
+img {
+  border-radius: 25%;
+  background-color: var(--secondary-dark);
+  height: .9rem;
+  margin: 1px;
 }
 
 /* HEADER */
@@ -46,11 +64,16 @@ img {
 
 #prjListSidebarTitle {
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 15px 15px 5px 15px;
 }
 
 .projectTitleSidebar {
-  margin: 3px 10px;
+  margin: 3px 15px;
+  color: var(--secondary-light)
 }
+
+
 
 .projectTitleSidebar:hover {
   color: var(--project-light);
@@ -82,18 +105,21 @@ img {
   max-width: 300px;
   background-color: var(--project-light);
   margin: 20px;
+  border-radius: 15px;
+  box-shadow: 10px 15px 20px rgb(151, 151, 151);
 }
 
 #titleDiv {
   background-color: var(--project-dark);
   display: flex;
   justify-content: space-between;
+  border-radius: 15px 15px 0 0;
 }
 
 /* add a class on all icons for the below styling */
-#deletePrj {
+/* #deletePrj {
   height: 1rem;
-}
+} */
 
 #deletePrj:hover {
   background-color: var(--urgent);
