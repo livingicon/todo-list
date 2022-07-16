@@ -127,15 +127,14 @@ const editElements = (function() {
     myProjects[e.target.getAttribute("data-position")]
     .toDoArray[e.target.getAttribute("data-todo")].priority = "completed";
     localStorage.setItem('myProjects', JSON.stringify(myProjects)); 
-    loadProjects.addAllProjects();
-
-    // const displayStyle = 
-    // document.getElementById(e.target.getAttribute("data-position"));
-    // if (displayStyle.style.display === "") {
-    //   loadProjects.addAllProjects();
-    // } else {
-    //   loadProjects.focusEdits(e);
-    // }
+    const displayStyle = 
+    document.getElementById(e.target.getAttribute("data-position")).style.display;
+    console.log(displayStyle);
+    if (displayStyle === "") {
+      loadProjects.addAllProjects();
+    } else {
+      loadProjects.focusEdits(e);
+    }
   };
 
   return { toDoCompleted };
