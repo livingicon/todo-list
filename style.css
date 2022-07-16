@@ -30,6 +30,11 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+button,
+img {
+  cursor: pointer;
+}
+
 /* HEADER */
 
 .header {
@@ -39,8 +44,17 @@ body {
 
 /* SIDEBAR */
 
+#prjListSidebarTitle {
+  cursor: pointer;
+}
+
 .projectTitleSidebar {
   margin: 3px 10px;
+}
+
+.projectTitleSidebar:hover {
+  color: var(--project-light);
+  cursor: pointer;
 }
 
 /* BODY */
