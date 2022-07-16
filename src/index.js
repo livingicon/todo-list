@@ -14,16 +14,18 @@ window.onload = function() {
 };
 
 const addProjectBtn = document.getElementById('addProjectBtn');
-// const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
+const prjListSidebarTitle = document.getElementById('prjListSidebarTitle');
 
 addProjectBtn.addEventListener('click', addForms.addProjectForm);
-// showAllProjectsBtn.addEventListener('dblclick', loadProjects.addAllProjects);
+prjListSidebarTitle.addEventListener('dblclick', loadProjects.addAllProjects)
+
+
 
 // TO DO
-//  2. clickable sidebar that display only one project (still minimize/maximize)
-//  3. when one visible, the show all button also become visible (reload basically)
-//  4. when you click another, it switches them out
-//  5. sidebar hover change color
+//  1. when one visible, the show all button also become visible (reload basically)
+//  2. edit and delete when only one selected keep only that one selected
+//  2. sidebar hover change color
+
 // REVISIONS LATER
 // - factory function??
 // - if project already exists alert??

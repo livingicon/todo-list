@@ -12,8 +12,13 @@ const loadProjects = (function() {
     const projectList = document.getElementById('projectList');
     projects.innerHTML = "";
     projectList.innerHTML = "";
+    const showAllProjectsBtn = document.createElement('button');
+    showAllProjectsBtn.innerHTML = "Show All Projects";
+    showAllProjectsBtn.setAttribute('id', 'showAllProjectsBtn');
+    showAllProjectsBtn.style.display = "none";
     projectsSidebar();
     myProjects.forEach(element => generateProjectCards(element));
+    projects.append(showAllProjectsBtn);
   };
   // GENERATE PROJECT CARDS
   const generateProjectCards = function(stuff){
@@ -142,7 +147,7 @@ const loadProjects = (function() {
   };
 
   const focusProject = function(e) {
-
+    const showAllProjectsBtn = document.getElementById('showAllProjectsBtn');
     for(let i = 0; i < myProjects.length; i++) {
       if (myProjects[i].project !== e.target.id) {
         let hidden = document.getElementById(`${i}`);
@@ -152,10 +157,11 @@ const loadProjects = (function() {
         nonHidden.style.display = "block";
       }
     }
+    showAllProjectsBtn.style.display = "block";
+    showAllProjectsBtn.addEventListener('click', addAllProjects);
   };
-  // resets when another is clicked?
 
-  return { addAllProjects, projectsSidebar };
+  return { addAllProjects, projectsSidebar, focusProject };
 })(); 
 
 export default loadProjects;

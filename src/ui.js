@@ -38,7 +38,8 @@ const addElements = (function() {
       return false;
     } else {
       let newProject = new Project(project);
-      myProjects.push(newProject);
+      // myProjects.push(newProject);
+      myProjects.unshift(newProject);
       localStorage.setItem('myProjects', JSON.stringify(myProjects));
       location.reload();
 
