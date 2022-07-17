@@ -28,6 +28,9 @@ const addElements = (function() {
   const addProject = function(e){
     let myProjects = [];
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    if (myProjects === null) {
+      myProjects = [];
+    }
     e.preventDefault();
     const project = document.getElementById('project').value;
     if (!project) {

@@ -7,6 +7,9 @@ const loadProjects = (function() {
   // ADD ALL PROJECTS
   const addAllProjects = function(){
     myProjects = JSON.parse(localStorage.getItem('myProjects'));
+    if (myProjects === null) {
+      myProjects = [];
+    }
     const projects = document.getElementById('projects');
     const projectList = document.getElementById('projectList');
     projects.innerHTML = "";
