@@ -2,7 +2,7 @@
 
 <h1>ToDo List App</h1>
 
-<p>This JavaScript app was one of the first I built with modules and before learning react. It was one of the most challenging things I had built at that point in my development, and even though it is certainly dated, I am proud of the problem-solving ability evident within the code.</p>
+<p>This JavaScript app was one of the first I built with modules and before learning react. It was one of the most challenging things I had built at that point in my development, and even though it is certainly dated, I am proud of the problem-solving ability evident within the code. I went to great lengths to attempt to provide an intuitive user experience.</p>
 
 <a href="https://livingicon.github.io/todo-list/" rel="nofollow">Live Demo</a>
 <img class="emoji" alt="point_left" height="20" width="20" src="https://github.githubassets.com/images/icons/emoji/unicode/1f448.png">
